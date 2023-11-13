@@ -95,10 +95,10 @@ init-db-test:DUMP_FILE=base_app_test
 
 restore-db init-db restore-db-test init-db-test:
 	@echo "${INFO_PROMPT_INIT}Clearing ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec techpump-technical-test-database dropdb --if-exist -f ${DB_TARGET}
-	@docker exec techpump-technical-test-database createdb ${DB_TARGET}
+	@docker exec database dropdb --if-exist -f ${DB_TARGET}
+	@docker exec database createdb ${DB_TARGET}
 	@echo "${INFO_PROMPT_INIT}Import ${DUMP_FILE}.dump data to ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec -i techpump-technical-test-database pg_restore --format c --dbname ${DB_TARGET} < etc$(PSEP)postgres$(PSEP)${DUMP_FILE}.dump
+	@docker exec -i database pg_restore --format c --dbname ${DB_TARGET} < etc$(PSEP)postgres$(PSEP)${DUMP_FILE}.dump
 
 .PHONY: db-dump
 db-dump: ##  Dumps current database in predefined location
@@ -110,7 +110,7 @@ db-dump-test:DB_TARGET=app_test
 
 db-dump db-dump-test:
 	@echo "${INFO_PROMPT_INIT}Dumping ${DB_TARGET} database into ${DB_TARGET}.dump...${INFO_PROMPT_END}"
-	@docker exec techpump-technical-test-database pg_dump --format c --clean --create ${DB_TARGET} > etc$(PSEP)postgres$(PSEP)${DB_TARGET}.dump
+	@docker exec database pg_dump --format c --clean --create ${DB_TARGET} > etc$(PSEP)postgres$(PSEP)${DB_TARGET}.dump
 	@echo "Done!"
 
 .PHONY: doctrine-migrate-db
@@ -124,23 +124,23 @@ doctrine-migrate-db-test:ENV_TARGET=--env=test
 
 doctrine-migrate-db doctrine-migrate-db-test:
 	@echo "${INFO_PROMPT_INIT}Migrate ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec -t techpump-technical-test-api bin/api doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
+	@docker exec -t api bin/api doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
 
 # ✅ Tests
 .PHONY: u-tests
 u-tests: composer-env-file ## ✅  Unit tests
 	@echo "${INFO_PROMPT_INIT}Run unit tests...${INFO_PROMPT_END}"
-	@docker exec techpump-technical-test-api ./vendor/bin/phpunit --colors=always --group unit
+	@docker exec api ./vendor/bin/phpunit --colors=always --group unit
 
 .PHONY: i-tests
 i-tests: composer-env-file ## ✅  Integration tests
 	@echo "${INFO_PROMPT_INIT}Run integration tests...${INFO_PROMPT_END}"
-	@docker exec techpump-technical-test-api ./vendor/bin/phpunit --colors=always --group integration
+	@docker exec api ./vendor/bin/phpunit --colors=always --group integration
 
 .PHONY: a-tests
 a-tests: composer-env-file ## ✅  Acceptance tests
 	@echo "${INFO_PROMPT_INIT}Run acceptance tests...${INFO_PROMPT_END}"
-	@docker exec techpump-technical-test-api ./vendor/bin/behat --colors --format=progress -v
+	@docker exec api ./vendor/bin/behat --colors --format=progress -v
 
 .PHONY: tests
 tests: composer-env-file init-db-test doctrine-migrate-db-test u-tests i-tests a-tests ## ✅  All tests
@@ -155,11 +155,11 @@ cache-clear: ##   Clears symfony cache
 .PHONY: enable-xdebug
 xdebug-enable: ## 🧰 Enable xDebug
 	@echo "${INFO_PROMPT_INIT}Enabling xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 techpump-technical-test-api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 techpump-technical-test-api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Fixing xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 techpump-technical-test-api sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 techpump-technical-test-api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug on...${INFO_PROMPT_END}"
 	@$(MAKE) stop
 	@$(MAKE) start
@@ -167,13 +167,13 @@ xdebug-enable: ## 🧰 Enable xDebug
 .PHONY: xdebug-disable
 xdebug-disable: ## 📴 Disable xDebug
 	@echo "${INFO_PROMPT_INIT}Disabling xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 techpump-technical-test-api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 techpump-technical-test-api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 techpump-technical-test-api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug off...${INFO_PROMPT_END}"
 	@$(MAKE) stop
 	@$(MAKE) start
 
 .PHONY: shell-api
 shell-api: ## 💻 api shell
-	@docker exec -it techpump-technical-test-api sh
+	@docker exec -it api sh

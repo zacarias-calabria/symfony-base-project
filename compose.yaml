@@ -1,7 +1,6 @@
 services:
     api:
-        container_name: techpump-technical-test-api
-        image: techpump-technical-test-api
+        container_name: api
         user: "${USER_ID}:${GROUP_ID}"
         build:
             context: .
@@ -12,7 +11,7 @@ services:
         volumes:
             - .:/app:delegated
     database:
-        container_name: techpump-technical-test-database
+        container_name: database
         image: postgres:${POSTGRES_VERSION:-15}-alpine
         environment:
             POSTGRES_DB: ${POSTGRES_DB:-app}
