@@ -1,0 +1,23 @@
+services:
+    api:
+        container_name: techpump-technical-test-api
+        image: techpump-technical-test-api
+        user: "${USER_ID}:${GROUP_ID}"
+        build:
+            context: .
+        command: "symfony server:start --dir=apps/api/public --port=8080"
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/app:delegated
+    database:
+        container_name: techpump-technical-test-database
+        image: postgres:${POSTGRES_VERSION:-15}-alpine
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB:-app}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+            POSTGRES_USER: ${POSTGRES_USER:-root}
+        restart: always
+        volumes:
+            - .docker/pgsql/data:/var/lib/postgresql/data:rw

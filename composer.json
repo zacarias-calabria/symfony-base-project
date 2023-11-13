@@ -1,0 +1,96 @@
+{
+  "type": "project",
+  "name": "zacarias/techpump-technical-test",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Zacarías Calabria",
+      "email": "zacarias.calabria@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "symfony/flex": "^2",
+    "symfony/framework-bundle": "^6",
+    "symfony/dotenv": "^6",
+    "symfony/console": "^6",
+    "symfony/runtime": "^6",
+    "symfony/yaml": "^6",
+    "symfony/messenger": "^6",
+    "symfony/validator": "^6",
+    "doctrine/orm": "^2",
+    "doctrine/doctrine-bundle": "^2",
+    "doctrine/doctrine-migrations-bundle": "^3",
+    "lambdish/phunctional": "^2.1",
+    "ramsey/uuid-doctrine": "^2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "symfony/web-profiler-bundle": "^6",
+    "phpunit/phpunit": "^10",
+    "behat/behat": "^3",
+    "fakerphp/faker": "^1",
+    "behat/mink-browserkit-driver": "^2",
+    "friends-of-behat/mink-extension": "^2",
+    "friends-of-behat/symfony-extension": "^2"
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/flex": true,
+      "symfony/runtime": true
+    },
+    "sort-packages": false
+  },
+  "autoload": {
+    "psr-4": {
+      "Techpump\\Apps\\API\\": "./apps/api/src/",
+      "Techpump\\": "./src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Techpump\\": "./tests/src"
+    }
+  },
+  "replace": {
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
+    "symfony/polyfill-php73": "*",
+    "symfony/polyfill-php74": "*",
+    "symfony/polyfill-php80": "*",
+    "symfony/polyfill-php81": "*"
+  },
+  "scripts": {
+    "api-cache-clear": [
+      "@php bin/api cache:clear"
+    ],
+    "cache-clear": [
+      "@api-cache-clear"
+    ],
+    "post-install-cmd": [
+      "@cache-clear"
+    ],
+    "post-update-cmd": [
+      "@cache-clear"
+    ],
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    }
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "^6"
+    }
+  }
+}
