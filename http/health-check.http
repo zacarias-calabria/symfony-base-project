@@ -1,0 +1,3 @@
+### Health check
+GET {{host}}/health-check
+Content-Type: application/json
