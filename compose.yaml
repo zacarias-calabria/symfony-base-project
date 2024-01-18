@@ -18,5 +18,7 @@ services:
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
             POSTGRES_USER: ${POSTGRES_USER:-root}
         restart: always
+        ports:
+            - "5432:5432"
         volumes:
             - .docker/pgsql/data:/var/lib/postgresql/data:rw
