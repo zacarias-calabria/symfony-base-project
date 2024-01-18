@@ -1,0 +1,17 @@
+imports:
+    - {resource: intangibles_doctrine.yaml}
+parameters:
+    context.root_path: '../../../../../..'
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    _instanceof:
+        App\Shared\Domain\Bus\Command\CommandHandler:
+            tags:
+                - {name: messenger.message_handler, bus: command.bus}
+        App\Shared\Domain\Bus\Query\QueryHandler:
+            tags:
+                - {name: messenger.message_handler, bus: query.bus}
+#    App\Things\Intangibles\:
+#        resource: '%context.root_path%/src/Things/Intangibles/{Application,Domain,Infrastructure}/*'
