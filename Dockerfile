@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 WORKDIR /app
 
@@ -15,8 +15,8 @@ RUN apk --update upgrade \
     libzip-dev \
     linux-headers
 
-RUN pecl install apcu-5.1.22  \
-    && pecl install xdebug-3.2.2
+RUN pecl install apcu-5.1.23  \
+    && pecl install xdebug-3.3.1
 
 RUN docker-php-ext-install -j$(nproc) \
         bcmath \
@@ -27,7 +27,7 @@ RUN docker-php-ext-install -j$(nproc) \
 
 RUN docker-php-ext-enable apcu opcache
 
-RUN apk add libpq-dev \
+RUN apk add --no-cache libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql pgsql
 
