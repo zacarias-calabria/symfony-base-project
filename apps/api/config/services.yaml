@@ -1,7 +1,5 @@
 imports:
   - { resource: ../../../src/Shared/Infrastructure/Symfony/DependencyInjection/shared_services.yaml }
-  - { resource: ../../../src/Inventory/Products/Infrastructure/Symfony/DependencyInjection/products_services.yaml }
-  - { resource: ../../../src/Shop/Carts/Infrastructure/Symfony/DependencyInjection/carts_services.yaml }
 parameters:
   app.root_path: '../../..'
   app.app_path: '/apps/api'

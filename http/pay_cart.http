@@ -1,8 +1,0 @@
-### Pay a cart
-POST {{host}}/cart/{{cart_id}}/pay
-Content-Type: application/json
-
-{
-  "productId": "3425007e-a3d9-4639-8e8c-8ff4b2d90fd0",
-  "quantity": 1
-}

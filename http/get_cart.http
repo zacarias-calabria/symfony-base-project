@@ -1,3 +1,0 @@
-### Get cart
-GET {{host}}/cart/{{cart_id}}
-Content-Type: application/json

@@ -1,7 +1,0 @@
-### Create cart
-PUT {{host}}/cart/{{$random.uuid}}
-Content-Type: application/json
-
-> {%
-    client.global.set("cart_id", request.url().split(/\//).pop());
-%}

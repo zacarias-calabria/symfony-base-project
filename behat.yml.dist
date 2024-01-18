@@ -14,7 +14,3 @@ default:
       paths: [ features/health_check ]
       contexts:
         - Tests\App\Shared\Infrastructure\Behat\Context\Api\HttpContext
-    cart:
-      paths: [ features/cart ]
-      contexts:
-        - Tests\App\Shared\Infrastructure\Behat\Context\Api\HttpContext

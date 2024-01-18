@@ -1,8 +1,0 @@
-### Update a product cart
-PATCH {{host}}/cart/{{cart_id}}/products/
-Content-Type: application/json
-
-{
-  "productId": "3425007e-a3d9-4639-8e8c-8ff4b2d90fd0",
-  "quantity": 1
-}
