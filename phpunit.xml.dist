@@ -18,8 +18,8 @@
     </php>
 
     <testsuites>
-        <testsuite name="Shared Test Suite">
-            <directory>./tests/src/Shared</directory>
+        <testsuite name="API App Test Suite">
+            <directory>./tests/apps/api/src</directory>
         </testsuite>
     </testsuites>
 </phpunit>
