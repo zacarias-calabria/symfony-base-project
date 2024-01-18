@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Domain;
+namespace Tests\App\Shop\Carts\Domain;
 
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\ProductInCart;
-use Tests\Techpump\Inventory\Products\Domain\ProductMother;
-use Tests\Techpump\Shared\Domain\MotherCreator;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\ProductInCart;
+use Tests\App\Inventory\Products\Domain\ProductMother;
+use Tests\App\Shared\Domain\MotherCreator;
 
 final class ProductInCartMother
 {

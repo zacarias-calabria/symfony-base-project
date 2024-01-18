@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Infrastructure\Persistence;
+namespace App\Shop\Carts\Infrastructure\Persistence;
 
+use App\Shop\Carts\Domain\Cart;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Domain\CartRepositoryError;
 use Exception;
-use Techpump\Shop\Carts\Domain\Cart;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Domain\CartRepositoryError;
-use Tests\Techpump\Shared\Domain\TraitInMemoryRepository;
+use Tests\App\Shared\Domain\TraitInMemoryRepository;
 
 final class InMemoryAllCartRepository implements CartRepository
 {

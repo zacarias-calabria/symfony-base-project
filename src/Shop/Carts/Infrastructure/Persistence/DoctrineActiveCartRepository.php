@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Infrastructure\Persistence;
+namespace App\Shop\Carts\Infrastructure\Persistence;
 
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use App\Shop\Carts\Domain\Cart;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Domain\CartRepositoryError;
 use Exception;
-use Techpump\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
-use Techpump\Shop\Carts\Domain\Cart;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Domain\CartRepositoryError;
 use Throwable;
 
 final class DoctrineActiveCartRepository extends DoctrineRepository implements CartRepository
@@ -30,12 +30,12 @@ final class DoctrineActiveCartRepository extends DoctrineRepository implements C
     {
         try {
             $cart = $this->repository(Cart::class)
-                         ->findOneBy(
-                             criteria:[
-                                 'id' => $id,
-                                 'status' => Cart::STATUS_ACTIVE
-                             ]
-                         );
+                ->findOneBy(
+                    criteria: [
+                        'id' => $id,
+                        'status' => Cart::STATUS_ACTIVE
+                    ]
+                );
         } catch (Exception $e) {
             throw new CartRepositoryError($e->getMessage());
         }

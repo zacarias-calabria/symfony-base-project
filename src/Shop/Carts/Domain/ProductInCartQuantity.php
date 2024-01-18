@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Domain;
+namespace App\Shop\Carts\Domain;
 
-use Techpump\Shared\Domain\ValueObject\IntValueObject;
+use App\Shared\Domain\ValueObject\IntValueObject;
 
-final class ProductInCartQuantity extends IntValueObject {
+final class ProductInCartQuantity extends IntValueObject
+{
     public function __construct(int $value)
     {
         $this->ensureIsAValidQuantity($value);

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Symfony;
+namespace App\Shared\Infrastructure\Symfony;
 
+use App\Shared\Domain\DomainError;
+use App\Shared\Domain\Utils\Classes;
+use App\Shared\Domain\Utils\Strings;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Techpump\Shared\Domain\DomainError;
-use Techpump\Shared\Domain\Utils\Classes;
-use Techpump\Shared\Domain\Utils\Strings;
 use Throwable;
 
 final readonly class ApiExceptionListener

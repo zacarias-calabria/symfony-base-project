@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Inventory\Products\Domain;
+namespace App\Inventory\Products\Domain;
 
 interface ProductRepository
 {

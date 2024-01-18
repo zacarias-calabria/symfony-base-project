@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shared\Domain;
+namespace Tests\App\Shared\Domain;
 
 final class UuidMother
 {

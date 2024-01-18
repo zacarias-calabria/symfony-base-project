@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Apps\API\Controller\Cart;
+namespace App\Apps\API\Controller\Cart;
 
+use App\Inventory\Products\Domain\ProductNotFound;
+use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
+use App\Shop\Carts\Domain\CartNotFound;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Techpump\Inventory\Products\Domain\ProductNotFound;
-use Techpump\Shared\Infrastructure\Symfony\ApiController;
-use Techpump\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
-use Techpump\Shop\Carts\Domain\CartNotFound;
 
 #[Route('/cart/{id}/products/', name: 'cart_add_product', methods: ['POST'])]
 #[Route('/cart/{id}/products', name: 'cart_add_product_fallback', methods: ['POST'])]
@@ -24,7 +24,7 @@ final class AddProductToCartController extends ApiController
             new AddProductToCartCommand(
                 cartId: $id,
                 productId: $content['productId'],
-                quantity: (int) $content['quantity']
+                quantity: (int)$content['quantity']
             )
         );
         return new JsonResponse(

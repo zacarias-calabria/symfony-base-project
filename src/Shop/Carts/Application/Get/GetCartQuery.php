@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\Get;
+namespace App\Shop\Carts\Application\Get;
 
-use Techpump\Shared\Domain\Bus\Query\Query;
+use App\Shared\Domain\Bus\Query\Query;
 
 final class GetCartQuery implements Query
 {

@@ -1,6 +1,6 @@
 {
   "type": "project",
-  "name": "zacarias/techpump-technical-test",
+  "name": "zacarias/symfony-base-project",
   "license": "proprietary",
   "minimum-stability": "stable",
   "prefer-stable": true,
@@ -48,13 +48,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Techpump\\Apps\\API\\": "./apps/api/src/",
-      "Techpump\\": "./src/"
+      "App\\Apps\\API\\": "./apps/api/src/",
+      "App\\": "./src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Techpump\\": "./tests/src"
+      "Tests\\App\\": "./tests/src"
     }
   },
   "replace": {

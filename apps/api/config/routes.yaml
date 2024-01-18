@@ -1,5 +1,5 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: Techpump\Apps\API\Controller
-    type: attribute
+  resource:
+    path: ../src/Controller/
+    namespace: App\Apps\API\Controller
+  type: attribute

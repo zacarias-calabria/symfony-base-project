@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Inventory\Products\Domain;
+namespace App\Inventory\Products\Domain;
 
-use Techpump\Shared\Domain\AggregateRoot\AggregateRoot;
+use App\Shared\Domain\AggregateRoot\AggregateRoot;
 
 class Product extends AggregateRoot
 {

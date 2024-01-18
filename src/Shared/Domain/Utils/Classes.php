@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Domain\Utils;
+namespace App\Shared\Domain\Utils;
 
 use ReflectionClass;
 

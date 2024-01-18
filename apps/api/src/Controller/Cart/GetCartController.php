@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Apps\API\Controller\Cart;
+namespace App\Apps\API\Controller\Cart;
 
+use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shop\Carts\Application\Get\GetCartQuery;
+use App\Shop\Carts\Domain\CartNotFound;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Techpump\Shared\Infrastructure\Symfony\ApiController;
-use Techpump\Shop\Carts\Application\Get\GetCartQuery;
-use Techpump\Shop\Carts\Domain\CartNotFound;
 
 #[Route('/cart/{id}', name: 'cart_get', methods: ['GET'])]
 final class GetCartController extends ApiController

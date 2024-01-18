@@ -1,18 +1,18 @@
 imports:
-    - {resource: ../../../src/Shared/Infrastructure/Symfony/DependencyInjection/shared_services.yaml}
-    - {resource: ../../../src/Inventory/Products/Infrastructure/Symfony/DependencyInjection/products_services.yaml}
-    - {resource: ../../../src/Shop/Carts/Infrastructure/Symfony/DependencyInjection/carts_services.yaml}
+  - { resource: ../../../src/Shared/Infrastructure/Symfony/DependencyInjection/shared_services.yaml }
+  - { resource: ../../../src/Inventory/Products/Infrastructure/Symfony/DependencyInjection/products_services.yaml }
+  - { resource: ../../../src/Shop/Carts/Infrastructure/Symfony/DependencyInjection/carts_services.yaml }
 parameters:
-    app.root_path: '../../..'
-    app.app_path: '/apps/api'
-    app.app_path_from_root: '%app.root_path%%app.app_path%'
+  app.root_path: '../../..'
+  app.app_path: '/apps/api'
+  app.app_path_from_root: '%app.root_path%%app.app_path%'
 services:
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    Techpump\Apps\API\Controller\:
-        resource: '%app.app_path_from_root%/src/Controller/'
-        tags: ['controller.service_arguments']
-    Techpump\Apps\API\:
-        resource: '%app.app_path_from_root%/src/'
-        exclude: '%app.app_path_from_root%/src/{Entity/,Controller/,Migrations/,DependencyInjection/,Kernel.php}'
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+  App\Apps\API\Controller\:
+    resource: '%app.app_path_from_root%/src/Controller/'
+    tags: [ 'controller.service_arguments' ]
+  App\Apps\API\:
+    resource: '%app.app_path_from_root%/src/'
+    exclude: '%app.app_path_from_root%/src/{Entity/,Controller/,Migrations/,DependencyInjection/,Kernel.php}'

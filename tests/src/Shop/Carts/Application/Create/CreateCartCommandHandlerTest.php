@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Application\Create;
+namespace Tests\App\Shop\Carts\Application\Create;
 
+use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shop\Carts\Application\Create\CreateCartCommand;
+use App\Shop\Carts\Application\Create\CreateCartCommandHandler;
+use App\Shop\Carts\Domain\CartAlreadyExistsError;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Techpump\Shared\Domain\Bus\Command\CommandHandler;
-use Techpump\Shop\Carts\Application\Create\CreateCartCommand;
-use Techpump\Shop\Carts\Application\Create\CreateCartCommandHandler;
-use Techpump\Shop\Carts\Domain\CartAlreadyExistsError;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
-use Tests\Techpump\Shared\Domain\UuidMother;
+use Tests\App\Shared\Domain\UuidMother;
 
 /**
  * @test
@@ -24,14 +24,6 @@ class CreateCartCommandHandlerTest extends TestCase
 {
     private CartRepository $repository;
     private CreateCartCommandHandler $handler;
-
-    protected function setUp(): void
-    {
-        $this->repository = new InMemoryAllCartRepository();
-        $this->handler = new CreateCartCommandHandler(
-            cartRepository: $this->repository
-        );
-    }
 
     /**
      * @test
@@ -91,5 +83,13 @@ class CreateCartCommandHandlerTest extends TestCase
             )
         );
         $this->assertTrue(true);
+    }
+
+    protected function setUp(): void
+    {
+        $this->repository = new InMemoryAllCartRepository();
+        $this->handler = new CreateCartCommandHandler(
+            cartRepository: $this->repository
+        );
     }
 }

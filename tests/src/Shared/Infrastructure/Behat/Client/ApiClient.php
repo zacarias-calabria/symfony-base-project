@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shared\Infrastructure\Behat\Client;
+namespace Tests\App\Shared\Infrastructure\Behat\Client;
 
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Session;

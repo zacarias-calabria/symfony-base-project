@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Application\AddProduct;
+namespace Tests\App\Shop\Carts\Application\AddProduct;
 
+use App\Inventory\Products\Domain\Product;
+use App\Inventory\Products\Domain\ProductNotFound;
+use App\Inventory\Products\Infrastructure\Persistence\InMemoryProductRepository;
+use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
+use App\Shop\Carts\Application\AddProduct\AddProductToCartCommandHandler;
+use App\Shop\Carts\Domain\Cart;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\InsufficientQuantityProductsError;
+use App\Shop\Carts\Domain\ProductInCart;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
 use PHPUnit\Framework\TestCase;
-use Techpump\Inventory\Products\Domain\Product;
-use Techpump\Inventory\Products\Domain\ProductNotFound;
-use Techpump\Inventory\Products\Infrastructure\Persistence\InMemoryProductRepository;
-use Techpump\Shared\Domain\Bus\Command\CommandHandler;
-use Techpump\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
-use Techpump\Shop\Carts\Application\AddProduct\AddProductToCartCommandHandler;
-use Techpump\Shop\Carts\Domain\Cart;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\InsufficientQuantityProductsError;
-use Techpump\Shop\Carts\Domain\ProductInCart;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
-use Tests\Techpump\Inventory\Products\Domain\ProductMother;
-use Tests\Techpump\Shop\Carts\Domain\CartMother;
+use Tests\App\Inventory\Products\Domain\ProductMother;
+use Tests\App\Shop\Carts\Domain\CartMother;
 
 use function Lambdish\Phunctional\first;
 
@@ -34,26 +34,6 @@ class AddProductToCartCommandHandlerTest extends TestCase
     private AddProductToCartCommandHandler $handler;
     private InMemoryActiveCartRepository $cartRepository;
     private InMemoryProductRepository $productRepository;
-
-    protected function setUp(): void
-    {
-        $this->cartRepository = new InMemoryActiveCartRepository([
-            self::EXISTING_CART_ID => CartMother::create(
-                id: new CartId(self::EXISTING_CART_ID)
-            ),
-        ]);
-        $this->productRepository = new InMemoryProductRepository([
-            self::EXISTING_PRODUCT_ID => ProductMother::create(
-                id: self::EXISTING_PRODUCT_ID,
-                price: 99.95,
-                taxRate: 21
-            ),
-        ]);
-        $this->handler = new AddProductToCartCommandHandler(
-            activeCartRepository: $this->cartRepository,
-            productRepository: $this->productRepository
-        );
-    }
 
     /**
      * @test
@@ -207,5 +187,25 @@ class AddProductToCartCommandHandlerTest extends TestCase
         $this->assertEquals(expected: 120.94, actual: $firstCartProductFound->unitAmount());
         $this->assertEquals(expected: 41.98, actual: $firstCartProductFound->totalRate());
         $this->assertEquals(expected: 241.88, actual: $firstCartProductFound->totalAmount());
+    }
+
+    protected function setUp(): void
+    {
+        $this->cartRepository = new InMemoryActiveCartRepository([
+            self::EXISTING_CART_ID => CartMother::create(
+                id: new CartId(self::EXISTING_CART_ID)
+            ),
+        ]);
+        $this->productRepository = new InMemoryProductRepository([
+            self::EXISTING_PRODUCT_ID => ProductMother::create(
+                id: self::EXISTING_PRODUCT_ID,
+                price: 99.95,
+                taxRate: 21
+            ),
+        ]);
+        $this->handler = new AddProductToCartCommandHandler(
+            activeCartRepository: $this->cartRepository,
+            productRepository: $this->productRepository
+        );
     }
 }

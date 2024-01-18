@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Infrastructure\Persistence;
+namespace Tests\App\Shop\Carts\Infrastructure\Persistence;
 
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Domain\CartRepositoryError;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
 use PHPUnit\Framework\TestCase;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Domain\CartRepositoryError;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
-use Tests\Techpump\Shop\Carts\Domain\CartIdMother;
-use Tests\Techpump\Shop\Carts\Domain\CartMother;
+use Tests\App\Shop\Carts\Domain\CartIdMother;
+use Tests\App\Shop\Carts\Domain\CartMother;
 
 /**
  * @test
@@ -77,6 +77,7 @@ class InMemoryAllCartRepositoryTest extends TestCase
             id: CartIdMother::create()
         );
     }
+
     /**
      * @test
      * Find A Cart

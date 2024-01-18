@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shared\Infrastructure\Behat\Context\Api;
+namespace Tests\App\Shared\Infrastructure\Behat\Context\Api;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use RuntimeException;
-use Tests\Techpump\Shared\Infrastructure\Behat\Client\ApiClient;
+use Tests\App\Shared\Infrastructure\Behat\Client\ApiClient;
 
 final class HttpContext extends RawMinkContext
 {
@@ -58,7 +58,7 @@ final class HttpContext extends RawMinkContext
         if ($this->getSession()->getStatusCode() !== $expectedResponseCode) {
             throw new RuntimeException(
                 sprintf(
-                    'The status code <%1$d> does not match the expected <%2$d>'.PHP_EOL.'Message: %3$s',
+                    'The status code <%1$d> does not match the expected <%2$d>' . PHP_EOL . 'Message: %3$s',
                     $this->getSession()->getStatusCode(),
                     $expectedResponseCode,
                     $this->getSession()->getPage()->getContent()

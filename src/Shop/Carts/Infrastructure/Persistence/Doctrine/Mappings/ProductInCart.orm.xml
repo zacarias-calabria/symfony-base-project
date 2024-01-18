@@ -3,7 +3,7 @@
                   xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Techpump\Shop\Carts\Domain\ProductInCart" table="products_in_carts">
+    <entity name="App\Shop\Carts\Domain\ProductInCart" table="products_in_carts">
         <id name="id" type="integer">
             <generator strategy="AUTO"/>
         </id>

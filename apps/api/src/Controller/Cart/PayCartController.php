@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Apps\API\Controller\Cart;
+namespace App\Apps\API\Controller\Cart;
 
+use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shop\Carts\Application\Pay\PayCartCommand;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\EmptyCartError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Techpump\Shared\Infrastructure\Symfony\ApiController;
-use Techpump\Shop\Carts\Application\Pay\PayCartCommand;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\EmptyCartError;
 
 #[Route('/cart/{cartId}/pay', name: 'cart_pay', methods: ['POST'])]
 final class PayCartController extends ApiController

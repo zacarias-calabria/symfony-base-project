@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Doctrine\Dbal;
+namespace App\Shared\Infrastructure\Doctrine\Dbal;
 
 interface DoctrineCustomType
 {

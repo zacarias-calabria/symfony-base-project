@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Apps\API;
+namespace App\Apps\API;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

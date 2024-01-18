@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Domain;
+namespace App\Shop\Carts\Domain;
 
+use App\Shared\Domain\AggregateRoot\AggregateRoot;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Techpump\Shared\Domain\AggregateRoot\AggregateRoot;
 
 use function Lambdish\Phunctional\search;
 
@@ -37,11 +37,6 @@ class Cart extends AggregateRoot
         );
     }
 
-    public function id(): CartId
-    {
-        return $this->id;
-    }
-
     public function status(): string
     {
         return $this->status;
@@ -50,11 +45,6 @@ class Cart extends AggregateRoot
     public function createdAt(): DateTimeImmutable
     {
         return $this->createdAt;
-    }
-
-    public function productsInCart(): Collection
-    {
-        return $this->productsInCart;
     }
 
     public function addProductToCart(ProductInCart $productInCart): void
@@ -73,10 +63,20 @@ class Cart extends AggregateRoot
     public function productInCartByProductId(string $productId): ProductInCart
     {
         return search(
-                   fn: fn(ProductInCart $product): bool => $productId === $product->product()->id(),
-                   coll: $this->productsInCart(),
-               )
-               ?? throw new ProductInCartNotFound();
+            fn: fn(ProductInCart $product): bool => $productId === $product->product()->id(),
+            coll: $this->productsInCart(),
+        )
+            ?? throw new ProductInCartNotFound();
+    }
+
+    public function id(): CartId
+    {
+        return $this->id;
+    }
+
+    public function productsInCart(): Collection
+    {
+        return $this->productsInCart;
     }
 
     public function updateProductCartQuantity(string $productId, int $quantity): void

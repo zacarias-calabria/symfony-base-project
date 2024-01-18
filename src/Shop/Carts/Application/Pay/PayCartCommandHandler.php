@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\Pay;
+namespace App\Shop\Carts\Application\Pay;
 
-use Techpump\Shared\Domain\Bus\Command\CommandHandler;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Domain\EmptyCartError;
+use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Domain\EmptyCartError;
 
 final class PayCartCommandHandler implements CommandHandler
 {

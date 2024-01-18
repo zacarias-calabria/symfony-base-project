@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Apps\API\Controller\Cart;
+namespace App\Apps\API\Controller\Cart;
 
+use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommand;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\ProductInCartNotFound;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Techpump\Shared\Infrastructure\Symfony\ApiController;
-use Techpump\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommand;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\ProductInCartNotFound;
 
 #[Route('/cart/{id}/products/', name: 'cart_update_product', methods: ['PATCH'])]
 #[Route('/cart/{id}/products', name: 'cart_update_product_fallback', methods: ['PATCH'])]
@@ -24,7 +24,7 @@ final class UpdateProductCartController extends ApiController
             new UpdateProductCartCommand(
                 cartId: $id,
                 productId: $content['productId'],
-                quantity: (int) $content['quantity']
+                quantity: (int)$content['quantity']
             )
         );
         return new JsonResponse(

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Domain;
+namespace Tests\App\Shop\Carts\Domain;
 
-use Techpump\Shop\Carts\Domain\CartId;
-use Tests\Techpump\Shared\Domain\UuidMother;
+use App\Shop\Carts\Domain\CartId;
+use Tests\App\Shared\Domain\UuidMother;
 
 final class CartIdMother
 {

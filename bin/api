@@ -1,10 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+use App\Apps\API\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Techpump\Apps\API\Kernel;
 
-if ( ! is_file(dirname(__DIR__) . '/vendor/autoload_runtime.php')) {
+if (!is_file(dirname(__DIR__) . '/vendor/autoload_runtime.php')) {
     throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
 }
 

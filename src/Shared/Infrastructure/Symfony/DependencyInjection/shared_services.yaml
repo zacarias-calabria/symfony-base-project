@@ -1,22 +1,22 @@
 parameters:
-    context.root_path: '../../../../..'
+  context.root_path: '../../../../..'
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-    _instanceof:
-        Techpump\Shared\Domain\Bus\Command\CommandHandler:
-            tags:
-                - {name: messenger.message_handler, bus: command.bus}
-        Techpump\Shared\Domain\Bus\Query\QueryHandler:
-            tags:
-                - {name: messenger.message_handler, bus: query.bus}
-    Techpump\Shared\:
-        resource: '%context.root_path%/src/Shared/{Application,Domain,Infrastructure}/*'
-    Techpump\Shared\Infrastructure\Symfony\ApiExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onException }
-    Techpump\Shared\Infrastructure\Symfony\ApiController:
-        arguments:
-            $commandBus: '@command.bus'
-            $queryBus: '@query.bus'
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  _instanceof:
+    App\Shared\Domain\Bus\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+    App\Shared\Domain\Bus\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+  App\Shared\:
+    resource: '%context.root_path%/src/Shared/{Application,Domain,Infrastructure}/*'
+  App\Shared\Infrastructure\Symfony\ApiExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onException }
+  App\Shared\Infrastructure\Symfony\ApiController:
+    arguments:
+      $commandBus: '@command.bus'
+      $queryBus: '@query.bus'

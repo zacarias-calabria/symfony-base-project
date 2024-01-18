@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shared\Infrastructure\PhpUnit;
+namespace Tests\App\Shared\Infrastructure\PhpUnit;
 
-use Techpump\Apps\API\Kernel;
+use App\Apps\API\Kernel;
 
 abstract class AppContextInfrastructureTestCase extends InfrastructureTestCase
 {

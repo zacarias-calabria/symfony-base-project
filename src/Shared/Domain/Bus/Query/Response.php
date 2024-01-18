@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Domain\Bus\Query;
+namespace App\Shared\Domain\Bus\Query;
 
-interface Response {
+interface Response
+{
     public function toArray(): array;
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Domain;
+namespace App\Shop\Carts\Domain;
 
-use Techpump\Shared\Domain\DomainError;
+use App\Shared\Domain\DomainError;
 
 final class EmptyCartError extends DomainError
 {

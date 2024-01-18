@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\Get;
+namespace App\Shop\Carts\Application\Get;
 
+use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shop\Carts\Application\CartResponse;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartRepository;
 use CodelyTv\Backoffice\Courses\Application\BackofficeCourseResponse;
 use CodelyTv\Backoffice\Courses\Domain\BackofficeCourse;
-use Techpump\Shared\Domain\Bus\Query\QueryHandler;
-use Techpump\Shop\Carts\Application\CartResponse;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartRepository;
 
 final readonly class GetCartQueryHandler implements QueryHandler
 {

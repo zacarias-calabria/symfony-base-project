@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Symfony;
+namespace App\Shared\Infrastructure\Symfony;
 
+use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Domain\Bus\Query\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Techpump\Shared\Domain\Bus\Command\Command;
-use Techpump\Shared\Domain\Bus\Query\Query;
-use Techpump\Shared\Domain\Bus\Query\Response;
 
 use function Lambdish\Phunctional\each;
 
@@ -27,15 +27,15 @@ abstract class ApiController
 
     abstract protected function exceptions(): array;
 
-    public function dispatch(Command $command): void
-    {
-        $this->commandBus->dispatch($command);
-    }
-
     protected function ask(Query $query): ?Response
     {
         /** @var HandledStamp $stamp */
         $stamp = $this->queryBus->dispatch($query)->last(HandledStamp::class);
         return $stamp->getResult();
+    }
+
+    public function dispatch(Command $command): void
+    {
+        $this->commandBus->dispatch($command);
     }
 }

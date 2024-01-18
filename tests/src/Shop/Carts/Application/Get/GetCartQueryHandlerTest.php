@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Application\Get;
+namespace Tests\App\Shop\Carts\Application\Get;
 
+use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shop\Carts\Application\Get\GetCartQuery;
+use App\Shop\Carts\Application\Get\GetCartQueryHandler;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
 use PHPUnit\Framework\TestCase;
-use Techpump\Shared\Domain\Bus\Query\QueryHandler;
-use Techpump\Shop\Carts\Application\Get\GetCartQuery;
-use Techpump\Shop\Carts\Application\Get\GetCartQueryHandler;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryAllCartRepository;
-use Tests\Techpump\Shop\Carts\Domain\CartMother;
+use Tests\App\Shop\Carts\Domain\CartMother;
 
 /**
  * @test
@@ -25,14 +25,6 @@ class GetCartQueryHandlerTest extends TestCase
 {
     private GetCartQueryHandler $handler;
     private CartRepository $repository;
-
-    protected function setUp(): void
-    {
-        $this->repository = new InMemoryAllCartRepository([]);
-        $this->handler = new GetCartQueryHandler(
-            cartRepository: $this->repository
-        );
-    }
 
     /**
      * @test
@@ -90,6 +82,14 @@ class GetCartQueryHandlerTest extends TestCase
         $this->assertEquals(
             expected: $cart->createdAt()->format('Y-m-d H:i:s'),
             actual: $cartFound->createdAt()
+        );
+    }
+
+    protected function setUp(): void
+    {
+        $this->repository = new InMemoryAllCartRepository([]);
+        $this->handler = new GetCartQueryHandler(
+            cartRepository: $this->repository
         );
     }
 }

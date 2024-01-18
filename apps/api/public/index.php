@@ -1,6 +1,6 @@
 <?php
 
-use Techpump\Apps\API\Kernel;
+use App\Apps\API\Kernel;
 
 require_once dirname(__DIR__) . '/../../vendor/autoload_runtime.php';
 

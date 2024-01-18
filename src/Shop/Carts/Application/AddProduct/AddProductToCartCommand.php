@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\AddProduct;
+namespace App\Shop\Carts\Application\AddProduct;
 
-use Techpump\Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Command\Command;
 
 final readonly class AddProductToCartCommand implements Command
 {

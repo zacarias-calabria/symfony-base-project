@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Application\Create;
+namespace Tests\App\Shop\Carts\Application\Create;
 
+use App\Shop\Carts\Application\Create\CartCreator;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Techpump\Shop\Carts\Application\Create\CartCreator;
-use Tests\Techpump\Shop\Carts\Domain\CartIdMother;
+use Tests\App\Shop\Carts\Domain\CartIdMother;
 
 /**
  * @test

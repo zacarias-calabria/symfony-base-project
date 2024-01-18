@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Infrastructure\Persistence;
+namespace Tests\App\Shop\Carts\Infrastructure\Persistence;
 
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\CartRepository;
+use App\Shop\Carts\Domain\CartRepositoryError;
+use App\Shop\Carts\Infrastructure\Persistence\DoctrineAllCartRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Techpump\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\CartRepository;
-use Techpump\Shop\Carts\Domain\CartRepositoryError;
-use Techpump\Shop\Carts\Infrastructure\Persistence\DoctrineAllCartRepository;
-use Tests\Techpump\Shared\Domain\UuidMother;
-use Tests\Techpump\Shared\Infrastructure\PhpUnit\AppContextInfrastructureTestCase;
-use Tests\Techpump\Shop\Carts\Domain\CartIdMother;
-use Tests\Techpump\Shop\Carts\Domain\CartMother;
+use Tests\App\Shared\Domain\UuidMother;
+use Tests\App\Shared\Infrastructure\PhpUnit\AppContextInfrastructureTestCase;
+use Tests\App\Shop\Carts\Domain\CartIdMother;
+use Tests\App\Shop\Carts\Domain\CartMother;
 
 /**
  * @test
@@ -24,15 +24,6 @@ use Tests\Techpump\Shop\Carts\Domain\CartMother;
 class DoctrineAllCartRepositoryTest extends AppContextInfrastructureTestCase
 {
     private DoctrineAllCartRepository $repository;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        /** @var Registry $service */
-        $service = $this->service('doctrine');
-        $entityManager = $service->getManager();
-        $this->repository = new DoctrineAllCartRepository(entityManager: $entityManager);
-    }
 
     /**
      * @test
@@ -99,5 +90,14 @@ class DoctrineAllCartRepositoryTest extends AppContextInfrastructureTestCase
             expected: $cart,
             actual: $foundCart
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        /** @var Registry $service */
+        $service = $this->service('doctrine');
+        $entityManager = $service->getManager();
+        $this->repository = new DoctrineAllCartRepository(entityManager: $entityManager);
     }
 }

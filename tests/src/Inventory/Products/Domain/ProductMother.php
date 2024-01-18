@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Inventory\Products\Domain;
+namespace Tests\App\Inventory\Products\Domain;
 
-use Techpump\Inventory\Products\Domain\Product;
-use Tests\Techpump\Shared\Domain\MotherCreator;
-use Tests\Techpump\Shared\Domain\UuidMother;
+use App\Inventory\Products\Domain\Product;
+use Tests\App\Shared\Domain\MotherCreator;
+use Tests\App\Shared\Domain\UuidMother;
 
 final class ProductMother
 {

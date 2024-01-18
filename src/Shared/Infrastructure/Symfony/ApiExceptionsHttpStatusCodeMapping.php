@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Symfony;
+namespace App\Shared\Infrastructure\Symfony;
 
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;

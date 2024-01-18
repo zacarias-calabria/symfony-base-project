@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Persistence\Doctrine;
+namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
+use App\Shared\Domain\AggregateRoot\AggregateRoot;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Techpump\Shared\Domain\AggregateRoot\AggregateRoot;
 
 abstract class DoctrineRepository
 {
@@ -14,15 +14,15 @@ abstract class DoctrineRepository
     {
     }
 
-    protected function entityManager(): EntityManagerInterface
-    {
-        return $this->entityManager;
-    }
-
     protected function persist(AggregateRoot $entity): void
     {
         $this->entityManager()->persist($entity);
         $this->entityManager()->flush($entity);
+    }
+
+    protected function entityManager(): EntityManagerInterface
+    {
+        return $this->entityManager;
     }
 
     protected function remove(AggregateRoot $entity): void

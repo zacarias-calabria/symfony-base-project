@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\Pay;
+namespace App\Shop\Carts\Application\Pay;
 
-use Techpump\Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Command\Command;
 
 final class PayCartCommand implements Command
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Application\Create;
+namespace App\Shop\Carts\Application\Create;
 
-use Techpump\Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Command\Command;
 
 final class CreateCartCommand implements Command
 {

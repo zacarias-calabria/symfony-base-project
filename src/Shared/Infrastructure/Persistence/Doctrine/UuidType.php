@@ -2,28 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Infrastructure\Persistence\Doctrine;
+namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
+use App\Shared\Domain\Utils\Strings;
+use App\Shared\Domain\ValueObject\Uuid;
+use App\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
-use Techpump\Shared\Domain\Utils\Strings;
-use Techpump\Shared\Domain\ValueObject\Uuid;
-use Techpump\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 
 use function Lambdish\Phunctional\last;
 
 abstract class UuidType extends StringType implements DoctrineCustomType
 {
-    abstract protected function typeClassName(): string;
-
-    public static function customTypeName(): string
-    {
-        return Strings::toSnakeCase(str_replace('Type', '', (string) last(explode('\\', static::class))));
-    }
-
     public function getName(): string
     {
         return self::customTypeName();
+    }
+
+    public static function customTypeName(): string
+    {
+        return Strings::toSnakeCase(str_replace('Type', '', (string)last(explode('\\', static::class))));
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
@@ -32,6 +30,8 @@ abstract class UuidType extends StringType implements DoctrineCustomType
 
         return new $className($value);
     }
+
+    abstract protected function typeClassName(): string;
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {

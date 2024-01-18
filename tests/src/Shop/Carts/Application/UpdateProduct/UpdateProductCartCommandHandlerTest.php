@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Application\UpdateProduct;
+namespace Tests\App\Shop\Carts\Application\UpdateProduct;
 
+use App\Inventory\Products\Domain\Product;
+use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
+use App\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommand;
+use App\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommandHandler;
+use App\Shop\Carts\Domain\Cart;
+use App\Shop\Carts\Domain\CartId;
+use App\Shop\Carts\Domain\CartNotFound;
+use App\Shop\Carts\Domain\InsufficientQuantityProductsError;
+use App\Shop\Carts\Domain\ProductInCart;
+use App\Shop\Carts\Domain\ProductInCartNotFound;
+use App\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
 use PHPUnit\Framework\TestCase;
-use Techpump\Inventory\Products\Domain\Product;
-use Techpump\Shared\Domain\Bus\Command\CommandHandler;
-use Techpump\Shop\Carts\Application\AddProduct\AddProductToCartCommand;
-use Techpump\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommand;
-use Techpump\Shop\Carts\Application\UpdateProduct\UpdateProductCartCommandHandler;
-use Techpump\Shop\Carts\Domain\Cart;
-use Techpump\Shop\Carts\Domain\CartId;
-use Techpump\Shop\Carts\Domain\CartNotFound;
-use Techpump\Shop\Carts\Domain\InsufficientQuantityProductsError;
-use Techpump\Shop\Carts\Domain\ProductInCart;
-use Techpump\Shop\Carts\Domain\ProductInCartNotFound;
-use Techpump\Shop\Carts\Infrastructure\Persistence\InMemoryActiveCartRepository;
-use Tests\Techpump\Inventory\Products\Domain\ProductMother;
-use Tests\Techpump\Shop\Carts\Domain\CartMother;
+use Tests\App\Inventory\Products\Domain\ProductMother;
+use Tests\App\Shop\Carts\Domain\CartMother;
 
 use function Lambdish\Phunctional\first;
 
@@ -35,18 +35,6 @@ class UpdateProductCartCommandHandlerTest extends TestCase
     private UpdateProductCartCommandHandler $handler;
     private InMemoryActiveCartRepository $cartRepository;
 
-    protected function setUp(): void
-    {
-        $this->cartRepository = new InMemoryActiveCartRepository([
-            self::EXISTING_CART_ID => CartMother::create(
-                id: new CartId(self::EXISTING_CART_ID)
-            ),
-        ]);
-        $this->handler = new UpdateProductCartCommandHandler(
-            activeCartRepository: $this->cartRepository,
-        );
-    }
-
     /**
      * @test
      * Be A Proper Class
@@ -57,7 +45,6 @@ class UpdateProductCartCommandHandlerTest extends TestCase
         $this->assertInstanceOf(UpdateProductCartCommandHandler::class, $this->handler);
         $this->assertInstanceOf(CommandHandler::class, $this->handler);
     }
-
 
     /**
      * @test
@@ -117,6 +104,33 @@ class UpdateProductCartCommandHandlerTest extends TestCase
         );
     }
 
+    private function getAValidCart(): Cart
+    {
+        return $this->cartRepository->search(
+            id: new CartId(
+                value: self::EXISTING_CART_ID
+            )
+        );
+    }
+
+    private function getAValidProduct(): Product
+    {
+        return ProductMother::create(self::EXISTING_PRODUCT_ID);
+    }
+
+    private function addAProductToCart(Cart $cart, Product $product): void
+    {
+        $cart->addProductToCart(
+            productInCart: ProductInCart::create(
+                cart: $cart,
+                product: $product,
+                unitPrice: $product->price(),
+                taxRate: $product->taxRate(),
+                quantity: 2
+            )
+        );
+    }
+
     /**
      * @test
      * Update An Existing Product Cart
@@ -158,30 +172,15 @@ class UpdateProductCartCommandHandlerTest extends TestCase
         );
     }
 
-    private function getAValidCart(): Cart
+    protected function setUp(): void
     {
-        return $this->cartRepository->search(
-            id: new CartId(
-                value: self::EXISTING_CART_ID
-            )
-        );
-    }
-
-    private function getAValidProduct(): Product
-    {
-        return ProductMother::create(self::EXISTING_PRODUCT_ID);
-    }
-
-    private function addAProductToCart(Cart $cart, Product $product): void
-    {
-        $cart->addProductToCart(
-            productInCart: ProductInCart::create(
-                cart: $cart,
-                product: $product,
-                unitPrice: $product->price(),
-                taxRate: $product->taxRate(),
-                quantity: 2
-            )
+        $this->cartRepository = new InMemoryActiveCartRepository([
+            self::EXISTING_CART_ID => CartMother::create(
+                id: new CartId(self::EXISTING_CART_ID)
+            ),
+        ]);
+        $this->handler = new UpdateProductCartCommandHandler(
+            activeCartRepository: $this->cartRepository,
         );
     }
 }

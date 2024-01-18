@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shared\Infrastructure\PhpUnit;
+namespace Tests\App\Shared\Infrastructure\PhpUnit;
 
 use Doctrine\ORM\EntityManager;
 use Exception;

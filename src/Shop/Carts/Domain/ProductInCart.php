@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shop\Carts\Domain;
+namespace App\Shop\Carts\Domain;
 
+use App\Inventory\Products\Domain\Product;
+use App\Shared\Domain\Utils\Currencies;
 use DateTimeImmutable;
-use Techpump\Inventory\Products\Domain\Product;
-use Techpump\Shared\Domain\Utils\Currencies;
 
 class ProductInCart
 {
     private string $id;
+
     private function __construct(
         private readonly Cart $cart,
         private readonly Product $product,
@@ -33,7 +34,7 @@ class ProductInCart
         float $taxRate,
         int $quantity,
     ): self {
-        $unitRate = Currencies::calculateRateFromAmount(amount:$unitPrice, taxRate:$taxRate);
+        $unitRate = Currencies::calculateRateFromAmount(amount: $unitPrice, taxRate: $taxRate);
         $unitAmount = Currencies::round(num: $unitPrice + $unitRate);
         $totalPrice = Currencies::round(num: $unitPrice * $quantity);
         $totalRate = Currencies::round(num: $unitRate * $quantity);

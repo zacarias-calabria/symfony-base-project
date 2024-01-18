@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Domain;
+namespace Tests\App\Shop\Carts\Domain;
 
+use App\Shop\Carts\Domain\Cart;
+use App\Shop\Carts\Domain\CartId;
 use DateTimeImmutable;
-use Techpump\Shop\Carts\Domain\Cart;
-use Techpump\Shop\Carts\Domain\CartId;
 
 final class CartMother
 {

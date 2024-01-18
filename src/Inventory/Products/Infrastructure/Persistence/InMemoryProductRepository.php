@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Inventory\Products\Infrastructure\Persistence;
+namespace App\Inventory\Products\Infrastructure\Persistence;
 
+use App\Inventory\Products\Domain\Product;
+use App\Inventory\Products\Domain\ProductNotFound;
+use App\Inventory\Products\Domain\ProductRepository;
+use App\Inventory\Products\Domain\ProductRepositoryError;
 use Exception;
-use Techpump\Inventory\Products\Domain\Product;
-use Techpump\Inventory\Products\Domain\ProductNotFound;
-use Techpump\Inventory\Products\Domain\ProductRepository;
-use Techpump\Inventory\Products\Domain\ProductRepositoryError;
-use Tests\Techpump\Shared\Domain\TraitInMemoryRepository;
+use Tests\App\Shared\Domain\TraitInMemoryRepository;
 
 final class InMemoryProductRepository implements ProductRepository
 {

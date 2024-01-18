@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Techpump\Shop\Carts\Domain;
+namespace Tests\App\Shop\Carts\Domain;
 
+use App\Shop\Carts\Domain\ProductInCart;
 use PHPUnit\Framework\TestCase;
-use Techpump\Shop\Carts\Domain\ProductInCart;
 
 /**
  * @test

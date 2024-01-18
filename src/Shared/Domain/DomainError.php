@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Domain;
+namespace App\Shared\Domain;
 
 use DomainException;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Techpump\Shared\Domain\AggregateRoot;
+namespace App\Shared\Domain\AggregateRoot;
 
 abstract class AggregateRoot
 {

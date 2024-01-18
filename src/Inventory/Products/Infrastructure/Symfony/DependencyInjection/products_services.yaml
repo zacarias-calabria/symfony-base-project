@@ -1,10 +1,10 @@
 imports:
-    - {resource: products_doctrine.yaml}
+  - { resource: products_doctrine.yaml }
 parameters:
-    context.root_path: '../../../../../..'
+  context.root_path: '../../../../../..'
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-    Techpump\Inventory\Products\:
-        resource: '%context.root_path%/src/Inventory/Products/{Application,Domain,Infrastructure}/*'
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  App\Inventory\Products\:
+    resource: '%context.root_path%/src/Inventory/Products/{Application,Domain,Infrastructure}/*'
