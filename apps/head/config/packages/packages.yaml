@@ -1,0 +1,12 @@
+imports:
+  - { resource: ../../../../apps/shared/config/packages/cache.yaml }
+  - { resource: ../../../../apps/shared/config/packages/doctrine.yaml }
+  - { resource: ../../../../apps/shared/config/packages/doctrine_migrations.yaml }
+  - { resource: ../../../../apps/shared/config/packages/framework.yaml }
+  - { resource: ../../../../apps/shared/config/packages/messenger.yaml }
+  - { resource: ../../../../apps/shared/config/packages/ramsey_uuid_doctrine.yaml }
+  - { resource: ../../../../apps/shared/config/packages/routing.yaml }
+  - { resource: ../../../../apps/shared/config/packages/translation.yaml }
+  - { resource: ../../../../apps/shared/config/packages/twig.yaml }
+  - { resource: ../../../../apps/shared/config/packages/validator.yaml }
+  - { resource: ../../../../apps/shared/config/packages/web_profiler.yaml }
