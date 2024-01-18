@@ -143,7 +143,8 @@ a-tests: composer-env-file ## ✅  Acceptance tests
 	@docker exec api ./vendor/bin/behat --colors --format=progress -v
 
 .PHONY: tests
-tests: composer-env-file init-db-test doctrine-migrate-db-test u-tests i-tests a-tests ## ✅  All tests
+tests: composer-env-file u-tests i-tests a-tests ## ✅  All tests
+##  init-db-test doctrine-migrate-db-test
 
 # ⚒️ Utils
 .PHONY: cache-clear
