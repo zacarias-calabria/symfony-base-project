@@ -77,21 +77,25 @@ rebuild: composer-env-file
 	make start
 
 # 🗄️ Database
+.PHONY: init-db
+init-db: ##  Init database from dump file base
+init-db:DB_TARGET=app
+init-db:DUMP_FILE=base_app
+
+.PHONY: init-db-test
+init-db-test: ##  init test database from dump file base
+init-db-test:DB_TARGET=app_test
+init-db-test:DUMP_FILE=base_app_test
+
 .PHONY: restore-db
 restore-db: ##  Restore database from dump file
 restore-db:DB_TARGET=app
 restore-db:DUMP_FILE=app
 
-init-db:DB_TARGET=app
-init-db:DUMP_FILE=base_app
-
 .PHONY: restore-db-test
 restore-db-test: ##  Restore test database from dump file
 restore-db-test:DB_TARGET=app_test
 restore-db-test:DUMP_FILE=app_test
-
-init-db-test:DB_TARGET=app_test
-init-db-test:DUMP_FILE=base_app_test
 
 restore-db init-db restore-db-test init-db-test:
 	@echo "${INFO_PROMPT_INIT}Clearing ${DB_TARGET} database...${INFO_PROMPT_END}"
@@ -124,7 +128,7 @@ doctrine-migrate-db-test:ENV_TARGET=--env=test
 
 doctrine-migrate-db doctrine-migrate-db-test:
 	@echo "${INFO_PROMPT_INIT}Migrate ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec -t api bin/api doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
+	@docker exec -t api bin/head doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
 
 # ✅ Tests
 .PHONY: u-tests
