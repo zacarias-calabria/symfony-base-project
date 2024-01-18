@@ -1,5 +1,6 @@
 imports:
   - { resource: ../../../src/Shared/Infrastructure/Symfony/DependencyInjection/shared_services.yaml }
+  - { resource: ../../../src/Things/Intangibles/Infrastructure/Symfony/DependencyInjection/intangibles_services.yaml }
 parameters:
   app.root_path: '../../..'
   app.app_path: '/apps/api'
