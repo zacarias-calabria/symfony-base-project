@@ -137,13 +137,18 @@ i-tests: composer-env-file ## ✅  Integration tests
 	@echo "${INFO_PROMPT_INIT}Run integration tests...${INFO_PROMPT_END}"
 	@docker exec api ./vendor/bin/phpunit --colors=always --group integration
 
+.PHONY: f-tests
+f-tests: composer-env-file ## ✅  Functionality tests
+	@echo "${INFO_PROMPT_INIT}Run functionality tests...${INFO_PROMPT_END}"
+	@docker exec api ./vendor/bin/phpunit --colors=always --group functionality
+
 .PHONY: a-tests
 a-tests: composer-env-file ## ✅  Acceptance tests
 	@echo "${INFO_PROMPT_INIT}Run acceptance tests...${INFO_PROMPT_END}"
 	@docker exec api ./vendor/bin/behat --colors --format=progress -v
 
 .PHONY: tests
-tests: composer-env-file u-tests i-tests a-tests ## ✅  All tests
+tests: composer-env-file u-tests i-tests f-tests a-tests ## ✅  All tests
 ##  init-db-test doctrine-migrate-db-test
 
 # ⚒️ Utils
