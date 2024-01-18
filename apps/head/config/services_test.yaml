@@ -1,0 +1,12 @@
+parameters:
+  app.root_path: '../../..'
+  app.behat_path: '/tests/src/Shared/Infrastructure/Behat'
+  app.behat_path_from_root: '%app.root_path%%app.behat_path%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Tests\App\Shared\Infrastructure\Behat\:
+    resource: '%app.behat_path_from_root%/*'

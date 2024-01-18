@@ -49,6 +49,7 @@
   "autoload": {
     "psr-4": {
       "App\\Apps\\API\\": "./apps/api/src/",
+      "App\\Apps\\Head\\": "./apps/head/src/",
       "App\\": "./src/"
     }
   },
@@ -68,10 +69,14 @@
     "symfony/polyfill-php81": "*"
   },
   "scripts": {
+    "head-cache-clear": [
+      "@php bin/head cache:clear"
+    ],
     "api-cache-clear": [
       "@php bin/api cache:clear"
     ],
     "cache-clear": [
+      "@head-cache-clear",
       "@api-cache-clear"
     ],
     "post-install-cmd": [
