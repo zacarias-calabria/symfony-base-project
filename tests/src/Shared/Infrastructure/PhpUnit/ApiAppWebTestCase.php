@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class ApiAppWebTestCase extends WebTestCase
 {
+    #[\Override]
     protected static function getKernelClass(): string
     {
         return Kernel::class;

@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Shared\Domain\ValueObject;
 
 use InvalidArgumentException;
+use Stringable;
 
-abstract class StringValueObject
+abstract class StringValueObject implements Stringable
 {
     public function __construct(
         protected string $value
@@ -24,6 +25,7 @@ abstract class StringValueObject
         return $this->value;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->value();

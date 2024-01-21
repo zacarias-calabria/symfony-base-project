@@ -24,6 +24,7 @@ final class HealthCheckGetController extends ApiController
         );
     }
 
+    #[\Override]
     protected function exceptions(): array
     {
         return [];

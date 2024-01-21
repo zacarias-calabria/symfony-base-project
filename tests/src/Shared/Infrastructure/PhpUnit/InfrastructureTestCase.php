@@ -13,6 +13,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
 {
     abstract protected function kernelClass(): string;
 
+    #[\Override]
     protected function setUp(): void
     {
         $_SERVER['KERNEL_CLASS'] = $this->kernelClass();

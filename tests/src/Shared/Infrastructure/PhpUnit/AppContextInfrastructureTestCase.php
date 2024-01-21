@@ -8,6 +8,7 @@ use App\Apps\API\Kernel;
 
 abstract class AppContextInfrastructureTestCase extends InfrastructureTestCase
 {
+    #[\Override]
     protected function kernelClass(): string
     {
         return Kernel::class;
