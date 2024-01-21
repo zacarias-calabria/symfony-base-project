@@ -36,7 +36,8 @@
     "fakerphp/faker": "^1",
     "behat/mink-browserkit-driver": "^2",
     "friends-of-behat/mink-extension": "^2",
-    "friends-of-behat/symfony-extension": "^2"
+    "friends-of-behat/symfony-extension": "^2",
+    "rector/rector": "^0.19.2"
   },
   "config": {
     "allow-plugins": {
