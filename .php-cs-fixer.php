@@ -20,7 +20,7 @@ return (new PhpCsFixer\Config())
 //        'no_unused_imports' => true,
 //        'single_line_after_imports' => true,
 //        'blank_line_between_import_groups' => true,
-        'single_quote' => true,
-        'yoda_style' => true,
+//        'single_quote' => true,
+//        'yoda_style' => true,
     ])
     ->setFinder($finder);
