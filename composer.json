@@ -15,13 +15,13 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "symfony/flex": "^2",
-    "symfony/framework-bundle": "^6",
-    "symfony/dotenv": "^6",
-    "symfony/console": "^6",
-    "symfony/runtime": "^6",
-    "symfony/yaml": "^6",
-    "symfony/messenger": "^6",
-    "symfony/validator": "^6",
+    "symfony/framework-bundle": "^7",
+    "symfony/dotenv": "^7",
+    "symfony/console": "^7",
+    "symfony/runtime": "^7",
+    "symfony/yaml": "^7",
+    "symfony/messenger": "^7",
+    "symfony/validator": "^7",
     "doctrine/orm": "^2",
     "doctrine/doctrine-bundle": "^2",
     "doctrine/doctrine-migrations-bundle": "^3",
@@ -30,7 +30,7 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "symfony/web-profiler-bundle": "^6",
+    "symfony/web-profiler-bundle": "^7",
     "phpunit/phpunit": "^10",
     "behat/behat": "^3",
     "fakerphp/faker": "^1",
@@ -97,7 +97,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "^6"
+      "require": "^7"
     }
   }
 }
