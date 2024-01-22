@@ -21,4 +21,4 @@ return static function (RectorConfig $rectorConfig): void {
         SymfonySetList::SYMFONY_64,
         SymfonySetList::SYMFONY_CODE_QUALITY
     ]);
-};
+    };
