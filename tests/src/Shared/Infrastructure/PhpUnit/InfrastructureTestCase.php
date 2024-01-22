@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Tests\App\Shared\Infrastructure\PhpUnit;
 
 use Doctrine\ORM\EntityManager;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Throwable;
 
 abstract class InfrastructureTestCase extends KernelTestCase
 {
@@ -24,7 +22,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function service(string $id): ?object
     {
@@ -37,7 +35,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function clearUnitOfWork(): void
     {
@@ -52,7 +50,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
     ): void {
         try {
             $fn();
-        } catch (Throwable $error) {
+        } catch (\Throwable $error) {
             if ($totalRetries === $attempt) {
                 throw $error;
             }

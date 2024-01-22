@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\App\Shared\Domain;
 
-use Closure;
-use DomainException;
 
 trait TraitInMemoryRepository
 {
@@ -21,7 +19,7 @@ trait TraitInMemoryRepository
     private function forceThrowAndExceptionIfIndicated(): void
     {
         if ($this->forceThrowAndException) {
-            throw new DomainException('Abstract in memory repository exception.');
+            throw new \DomainException('Abstract in memory repository exception.');
         }
     }
 
@@ -36,7 +34,7 @@ trait TraitInMemoryRepository
         $this->objects[$this->getObjectId($object)] = clone $object;
     }
 
-    protected function findObject(Closure $comparator): ?object
+    protected function findObject(\Closure $comparator): ?object
     {
         $this->forceThrowAndExceptionIfIndicated();
 

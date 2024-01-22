@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Symfony;
 
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -14,7 +13,7 @@ final class ApiExceptionsHttpStatusCodeMapping
 {
     private const DEFAULT_STATUS_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
     private array $exceptions = [
-        InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
+        \InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
         NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
     ];
 
@@ -27,7 +26,7 @@ final class ApiExceptionsHttpStatusCodeMapping
     {
         $statusCode = get($exceptionClass, $this->exceptions, self::DEFAULT_STATUS_CODE);
         if ($statusCode === null) {
-            throw new InvalidArgumentException("There are no status code mapping for <$exceptionClass>");
+            throw new \InvalidArgumentException("There are no status code mapping for <$exceptionClass>");
         }
         return $statusCode;
     }

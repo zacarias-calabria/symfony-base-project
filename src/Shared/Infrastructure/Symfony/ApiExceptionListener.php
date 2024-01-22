@@ -9,7 +9,6 @@ use App\Shared\Domain\Utils\Classes;
 use App\Shared\Domain\Utils\Strings;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Throwable;
 
 final readonly class ApiExceptionListener
 {
@@ -31,13 +30,13 @@ final readonly class ApiExceptionListener
         );
     }
 
-    private function extractSuitableException(ExceptionEvent $event): Throwable
+    private function extractSuitableException(ExceptionEvent $event): \Throwable
     {
         $throwable = $event->getThrowable();
         return $throwable->getPrevious() ?? $throwable;
     }
 
-    private function exceptionCodeFor(Throwable $error): string
+    private function exceptionCodeFor(\Throwable $error): string
     {
         $domainErrorClass = DomainError::class;
 

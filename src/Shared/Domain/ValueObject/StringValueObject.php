@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
 
-use InvalidArgumentException;
-use Stringable;
 
-abstract class StringValueObject implements Stringable
+abstract class StringValueObject implements \Stringable
 {
     public function __construct(
         protected string $value
@@ -34,7 +32,7 @@ abstract class StringValueObject implements Stringable
     private function ensureIsAValidString(string $string): void
     {
         if (true === empty($string)) {
-            throw new InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $string));
+            throw new \InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $string));
         }
     }
 }

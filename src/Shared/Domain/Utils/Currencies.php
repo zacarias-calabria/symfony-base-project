@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Utils;
 
-use function round;
 
 final class Currencies
 {
@@ -17,7 +16,7 @@ final class Currencies
 
     public static function round(float $num): float
     {
-        return round(
+        return \round(
             num: $num,
             precision: 2
         );

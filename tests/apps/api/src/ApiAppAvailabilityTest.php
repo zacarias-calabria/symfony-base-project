@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Apps\API;
 
-use Generator;
 use Tests\App\Shared\Infrastructure\PhpUnit\ApiAppWebTestCase;
 
 class ApiAppAvailabilityTest extends ApiAppWebTestCase
@@ -26,7 +25,7 @@ class ApiAppAvailabilityTest extends ApiAppWebTestCase
         self::assertResponseIsSuccessful();
     }
 
-    public static function checkRoutesProvider(): Generator
+    public static function checkRoutesProvider(): \Generator
     {
         yield ['GET', '/health-check'];
     }
