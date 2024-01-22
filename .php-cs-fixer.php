@@ -9,8 +9,8 @@ $finder = (new PhpCsFixer\Finder())
 
 return (new PhpCsFixer\Config())
     ->setRules([
+//        '@PHP83Migration' => true,
         '@PSR12' => true,
-        '@PHP83Migration' => true,
-        '@Symfony' => true,
+//        '@Symfony' => true,
     ])
     ->setFinder($finder);

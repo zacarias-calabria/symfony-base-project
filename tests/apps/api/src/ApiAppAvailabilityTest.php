@@ -7,7 +7,6 @@ namespace Tests\Apps\API;
 use Generator;
 use Tests\App\Shared\Infrastructure\PhpUnit\ApiAppWebTestCase;
 
-
 class ApiAppAvailabilityTest extends ApiAppWebTestCase
 {
     /**

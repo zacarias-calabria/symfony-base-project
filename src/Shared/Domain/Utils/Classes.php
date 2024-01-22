@@ -8,7 +8,6 @@ use ReflectionClass;
 
 final class Classes
 {
-
     public static function extractClassName(object $object): string
     {
         return (new ReflectionClass($object))->getShortName();
