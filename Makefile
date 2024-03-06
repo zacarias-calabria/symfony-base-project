@@ -184,6 +184,11 @@ xdebug-disable: ## 📴 Disable xDebug
 	@$(MAKE) stop
 	@$(MAKE) start
 
+.PHONY: psalm
+psalm: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
+	@echo "${INFO_PROMPT_INIT}Run Psalm analysis...${INFO_PROMPT_END}"
+	@docker exec api ./vendor/bin/psalm ${PSALM_OPTIONS}
+
 .PHONY: shell-api
 shell-api: ## 💻 api shell
 	@docker exec -it api sh

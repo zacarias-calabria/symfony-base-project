@@ -87,6 +87,9 @@
       "@head-cache-clear",
       "@api-cache-clear"
     ],
+    "psalm": [
+      "./vendor/bin/psalm"
+    ],
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
