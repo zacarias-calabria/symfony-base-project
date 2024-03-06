@@ -71,6 +71,12 @@
     "symfony/polyfill-php81": "*"
   },
   "scripts": {
+    "post-install-cmd": [
+      "@cache-clear"
+    ],
+    "post-update-cmd": [
+      "@cache-clear"
+    ],
     "head-cache-clear": [
       "@php bin/head cache:clear"
     ],
@@ -80,12 +86,6 @@
     "cache-clear": [
       "@head-cache-clear",
       "@api-cache-clear"
-    ],
-    "post-install-cmd": [
-      "@cache-clear"
-    ],
-    "post-update-cmd": [
-      "@cache-clear"
     ],
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
