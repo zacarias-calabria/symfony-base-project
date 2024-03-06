@@ -28,7 +28,7 @@ composer-require: INTERACTIVE=-ti --interactive
 composer-require: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
  .PHONY: composer-update
-composer-update: DOCKER_COMMAND=update ## 🧩 Composer require.
+composer-update: DOCKER_COMMAND=update ## 🧩 Composer update.
 composer-update: INTERACTIVE=-ti --interactive
 composer-update: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
