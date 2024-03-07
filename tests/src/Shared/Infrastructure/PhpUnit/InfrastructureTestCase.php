@@ -42,6 +42,9 @@ abstract class InfrastructureTestCase extends KernelTestCase
         $this->service(EntityManager::class)->clear();
     }
 
+    /**
+     * @psalm-param int<0, max> $timeToWaitOnErrorInSeconds
+     */
     protected function eventually(
         callable $fn,
         int $totalRetries = 3,
