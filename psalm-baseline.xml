@@ -5,4 +5,9 @@
       <code><![CDATA[getClient]]></code>
     </UndefinedInterfaceMethod>
   </file>
+  <file src="tests/src/Shared/Infrastructure/PhpUnit/InfrastructureTestCase.php">
+    <PossiblyNullReference>
+      <code><![CDATA[clear]]></code>
+    </PossiblyNullReference>
+  </file>
 </files>
