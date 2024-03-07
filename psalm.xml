@@ -16,6 +16,7 @@
         <ignoreFiles>
             <directory name="var"/>
             <directory name="vendor"/>
+            <file name="tests/bootstrap.php"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
