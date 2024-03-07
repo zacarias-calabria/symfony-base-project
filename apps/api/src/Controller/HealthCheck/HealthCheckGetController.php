@@ -7,7 +7,7 @@ namespace App\Apps\API\Controller\HealthCheck;
 use App\Shared\Infrastructure\Symfony\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/health-check', name: 'health_check_get', methods: ['GET'])]
 final class HealthCheckGetController extends ApiController
