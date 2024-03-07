@@ -10,7 +10,7 @@ require_once $rootPath.'/vendor/autoload.php';
 
 (new Dotenv())->loadEnv($rootPath.'/.env');
 
-if ($_SERVER['APP_DEBUG']) {
+if (isset($_SERVER['APP_DEBUG']) && $_SERVER['APP_DEBUG']) {
     umask(0000);
 }
 
