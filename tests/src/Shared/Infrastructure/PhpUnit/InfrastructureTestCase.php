@@ -44,9 +44,9 @@ abstract class InfrastructureTestCase extends KernelTestCase
 
     protected function eventually(
         callable $fn,
-        $totalRetries = 3,
-        $timeToWaitOnErrorInSeconds = 1,
-        $attempt = 0
+        int $totalRetries = 3,
+        int $timeToWaitOnErrorInSeconds = 1,
+        int $attempt = 0
     ): void {
         try {
             $fn();
