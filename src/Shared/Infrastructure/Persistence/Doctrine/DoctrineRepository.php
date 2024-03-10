@@ -17,7 +17,7 @@ abstract class DoctrineRepository
     protected function persist(AggregateRoot $entity): void
     {
         $this->entityManager()->persist($entity);
-        $this->entityManager()->flush($entity);
+        $this->entityManager()->flush();
     }
 
     protected function entityManager(): EntityManagerInterface
@@ -28,7 +28,7 @@ abstract class DoctrineRepository
     protected function remove(AggregateRoot $entity): void
     {
         $this->entityManager()->remove($entity);
-        $this->entityManager()->flush($entity);
+        $this->entityManager()->flush();
     }
 
     protected function repository(string $entityClass): EntityRepository
