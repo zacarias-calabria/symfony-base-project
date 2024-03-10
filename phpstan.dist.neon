@@ -7,6 +7,7 @@ parameters:
         - tests/
     excludePaths:
         analyse:
+            - tests/bootstrap.php
             - tests/src/Shared/Infrastructure/Behat
     symfony:
         containerXmlPath: var/cache/head/dev/App_Apps_Head_KernelDevDebugContainer.xml
