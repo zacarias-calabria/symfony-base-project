@@ -25,6 +25,9 @@ abstract class ApiController
         );
     }
 
+    /**
+     * @return array<class-string,int>
+     */
     abstract protected function exceptions(): array;
 
     protected function ask(Query $query): ?Response
