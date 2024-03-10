@@ -41,6 +41,7 @@
     "phpstan/phpstan": "^1.10",
     "phpstan/extension-installer": "^1.3",
     "phpstan/phpstan-symfony": "^1.3",
+    "phpstan/phpstan-doctrine": "^1.3",
     "vimeo/psalm": "^5.22",
     "psalm/plugin-symfony": "^5.1",
     "psalm/plugin-phpunit": "^0.18.4",
