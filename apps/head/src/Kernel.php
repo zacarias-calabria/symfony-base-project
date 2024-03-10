@@ -31,12 +31,4 @@ class Kernel extends BaseKernel
     {
         return $this->getProjectDir() . self::ROOT_PATH . '/var/log' . self::APP_PATH;
     }
-
-    /**
-     * Gets the path to the configuration directory.
-     */
-    private function getConfigDir(): string
-    {
-        return $this->getProjectDir() . '/config';
-    }
 }
