@@ -99,7 +99,10 @@
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
-    }
+    },
+    "phpstan": [
+      "./vendor/bin/phpstan --memory-limit=512M"
+    ]
   },
   "conflict": {
     "symfony/symfony": "*"
