@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class Uuid implements \Stringable
 {
-    public function __construct(
+    final public function __construct(
         protected string $value
     ) {
         $this->ensureIsAValidUuid($value);
