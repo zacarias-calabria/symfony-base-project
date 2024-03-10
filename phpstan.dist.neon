@@ -5,6 +5,9 @@ parameters:
         - apps/
         - src/
         - tests/
+    excludePaths:
+        analyse:
+            - tests/src/Shared/Infrastructure/Behat
     symfony:
         containerXmlPath: var/cache/head/dev/App_Apps_Head_KernelDevDebugContainer.xml
     doctrine:
