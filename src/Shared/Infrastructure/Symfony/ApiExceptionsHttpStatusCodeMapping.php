@@ -20,6 +20,9 @@ final class ApiExceptionsHttpStatusCodeMapping
         NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
     ];
 
+    /**
+     * @param  class-string  $exceptionClass
+     */
     public function register(string $exceptionClass, int $statusCode): void
     {
         $this->exceptions[$exceptionClass] = $statusCode;

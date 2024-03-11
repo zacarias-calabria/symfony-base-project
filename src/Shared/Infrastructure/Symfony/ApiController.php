@@ -20,7 +20,7 @@ abstract class ApiController
         ApiExceptionsHttpStatusCodeMapping $exceptionHandler
     ) {
         each(
-            fn (int $httpCode, string $exceptionClass) => $exceptionHandler->register($exceptionClass, $httpCode),
+            fn (int $httpCode, string $exceptionClass) => $exceptionHandler->register($exceptionClass, $httpCode), // @phpstan-ignore-line
             $this->exceptions()
         );
     }
