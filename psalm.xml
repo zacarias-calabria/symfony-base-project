@@ -4,7 +4,6 @@
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
         errorLevel="2"
-        resolveFromConfigFile="true"
         findUnusedBaselineEntry="false"
         findUnusedCode="true"
         allowStringToStandInForClass="true"
