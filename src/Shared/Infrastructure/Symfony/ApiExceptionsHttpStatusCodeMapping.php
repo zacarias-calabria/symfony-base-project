@@ -12,6 +12,9 @@ use function Lambdish\Phunctional\get;
 final class ApiExceptionsHttpStatusCodeMapping
 {
     private const DEFAULT_STATUS_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
+    /**
+     * @var array<class-string, int>
+     */
     private array $exceptions = [
         \InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
         NotFoundHttpException::class => Response::HTTP_NOT_FOUND,
