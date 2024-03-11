@@ -6,7 +6,7 @@
         errorLevel="2"
         resolveFromConfigFile="true"
         findUnusedBaselineEntry="false"
-        findUnusedCode="false"
+        findUnusedCode="true"
         allowStringToStandInForClass="true"
     errorBaseline="psalm-baseline.xml"
 >
@@ -22,7 +22,9 @@
         </ignoreFiles>
     </projectFiles>
     <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+            <containerXml>var/cache/api/dev/App_Apps_API_KernelDevDebugContainer.xml</containerXml>
+        </pluginClass>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>
