@@ -19,7 +19,12 @@
             <directory name="var"/>
             <directory name="vendor"/>
             <directory name="apps/head/src/Migrations"/>
-            <directory name="tests/src/Shared/Infrastructure/Behat"/>
+            <!-- @ToDo: ZCL@20240311: Ignore paths until add some related business logic. -->
+            <directory name="src/Things"/>
+            <!-- @ToDo: ZCL@20240311: Ignore paths until add some related business logic. -->
+            <directory name="src/Shared"/>
+            <!-- @ToDo: ZCL@20240311: Ignore paths until add some related business logic. -->
+            <directory name="tests/src/Shared"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
