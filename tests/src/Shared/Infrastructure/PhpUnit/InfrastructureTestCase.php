@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\App\Shared\Infrastructure\PhpUnit;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 abstract class InfrastructureTestCase extends KernelTestCase
@@ -29,17 +28,6 @@ abstract class InfrastructureTestCase extends KernelTestCase
         return self::getContainer()->get($id);
     }
 
-    /**
-     * @throws \Exception
-     */
-    protected function clearUnitOfWork(): void
-    {
-        $this->service(EntityManager::class)->clear();
-    }
-
-    /**
-     * @psalm-param int<0, max> $timeToWaitOnErrorInSeconds
-     */
     protected function eventually(
         callable $fn,
         int $totalRetries = 3,
