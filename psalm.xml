@@ -7,7 +7,7 @@
         findUnusedBaselineEntry="false"
         findUnusedCode="true"
         allowStringToStandInForClass="true"
-    errorBaseline="psalm-baseline.xml"
+        errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="apps"/>
