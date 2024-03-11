@@ -29,11 +29,6 @@ abstract class InfrastructureTestCase extends KernelTestCase
         return self::getContainer()->get($id);
     }
 
-    protected function parameter($parameter): mixed
-    {
-        return self::getContainer()->getParameter($parameter);
-    }
-
     /**
      * @throws \Exception
      */
