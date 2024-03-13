@@ -128,28 +128,28 @@ doctrine-migrate-db-test:ENV_TARGET=--env=test
 
 doctrine-migrate-db doctrine-migrate-db-test:
 	@echo "${INFO_PROMPT_INIT}Migrate ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec -t api bin/head doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
+	@docker exec -t head bin/head doctrine:migrations:migrate ${ENV_TARGET} --no-interaction
 
 # ✅ Tests
 .PHONY: u-tests
 u-tests: composer-env-file ## ✅  Unit tests
 	@echo "${INFO_PROMPT_INIT}Run unit tests...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/phpunit --colors=always --group unit
+	@docker exec head ./vendor/bin/phpunit --colors=always --group unit
 
 .PHONY: i-tests
 i-tests: composer-env-file ## ✅  Integration tests
 	@echo "${INFO_PROMPT_INIT}Run integration tests...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/phpunit --colors=always --group integration
+	@docker exec head ./vendor/bin/phpunit --colors=always --group integration
 
 .PHONY: f-tests
 f-tests: composer-env-file ## ✅  Functionality tests
 	@echo "${INFO_PROMPT_INIT}Run functionality tests...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/phpunit --colors=always --group functionality
+	@docker exec head ./vendor/bin/phpunit --colors=always --group functionality
 
 .PHONY: a-tests
 a-tests: composer-env-file ## ✅  Acceptance tests
 	@echo "${INFO_PROMPT_INIT}Run acceptance tests...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/behat --colors --format=progress -v
+	@docker exec head ./vendor/bin/behat --colors --format=progress -v
 
 .PHONY: tests
 tests: composer-env-file u-tests i-tests f-tests a-tests ## ✅  All tests
@@ -162,14 +162,14 @@ cache-clear: ##   Clears symfony cache
 	@docker run --rm $(INTERACTIVE) --volume $(CURRENT_DIR):/app --user $(id -u):$(id -g) \
 		composer:2 run post-install-cmd
 
-.PHONY: enable-xdebug
+.PHONY: xdebug-enable
 xdebug-enable: ## 🧰 Enable xDebug
 	@echo "${INFO_PROMPT_INIT}Enabling xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Fixing xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 api sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug on...${INFO_PROMPT_END}"
 	@$(MAKE) stop
 	@$(MAKE) start
@@ -177,9 +177,9 @@ xdebug-enable: ## 🧰 Enable xDebug
 .PHONY: xdebug-disable
 xdebug-disable: ## 📴 Disable xDebug
 	@echo "${INFO_PROMPT_INIT}Disabling xdebug...${INFO_PROMPT_END}"
-	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
-	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 head sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug off...${INFO_PROMPT_END}"
 	@$(MAKE) stop
 	@$(MAKE) start
@@ -187,16 +187,20 @@ xdebug-disable: ## 📴 Disable xDebug
 .PHONY: phpstan
 phpstan: ## 📊 PHPStan (make psalm PHPSTAN_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run PHPStan static code analysis...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/phpstan analyse --no-progress ${PHPSTAN_OPTIONS}
+	@docker exec head ./vendor/bin/phpstan analyse --no-progress ${PHPSTAN_OPTIONS}
 
 .PHONY: psalm
 psalm: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run Psalm static code analysis...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
+	@docker exec head ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
 
 .PHONY: code-static-analyse
 code-static-analyse: phpstan psalm ## 📊 Code static analysis with PHPStan and PSalm
 
+.PHONY: shell-head
+shell-head: ## 💻 head container shell
+	@docker exec -it head sh
+
 .PHONY: shell-api
-shell-api: ## 💻 api shell
+shell-api: ## 💻 api container shell
 	@docker exec -it api sh
