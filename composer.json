@@ -46,7 +46,8 @@
     "vimeo/psalm": "^5.22",
     "psalm/plugin-symfony": "^5.1",
     "psalm/plugin-phpunit": "^0.18.4",
-    "weirdan/doctrine-psalm-plugin": "^2.9"
+    "weirdan/doctrine-psalm-plugin": "^2.9",
+    "phpmd/phpmd": "^2.15"
   },
   "config": {
     "allow-plugins": {
