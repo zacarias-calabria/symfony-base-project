@@ -184,10 +184,18 @@ xdebug-disable: ## 📴 Disable xDebug
 	@$(MAKE) stop
 	@$(MAKE) start
 
+.PHONY: phpstan
+phpstan: ## 📊 PHPStan (make psalm PHPSTAN_OPTIONS="--help")
+	@echo "${INFO_PROMPT_INIT}Run PHPStan static code analysis...${INFO_PROMPT_END}"
+	@docker exec api ./vendor/bin/phpstan analyse --no-progress ${PHPSTAN_OPTIONS}
+
 .PHONY: psalm
 psalm: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
-	@echo "${INFO_PROMPT_INIT}Run Psalm analysis...${INFO_PROMPT_END}"
-	@docker exec api ./vendor/bin/psalm ${PSALM_OPTIONS}
+	@echo "${INFO_PROMPT_INIT}Run Psalm static code analysis...${INFO_PROMPT_END}"
+	@docker exec api ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
+
+.PHONY: code-static-analyse
+code-static-analyse: phpstan psalm ## 📊 Code static analysis with PHPStan and PSalm
 
 .PHONY: shell-api
 shell-api: ## 💻 api shell
