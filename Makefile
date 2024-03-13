@@ -194,8 +194,13 @@ psalm: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run Psalm static code analysis...${INFO_PROMPT_END}"
 	@docker exec head ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
 
+.PHONY: phpmd
+phpmd: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
+	@echo "${INFO_PROMPT_INIT}Run PHPMD static code analysis...${INFO_PROMPT_END}"
+	@docker exec head ./vendor/bin/phpmd apps,src,tests ansi phpmd.xml ${PSALM_OPTIONS}
+
 .PHONY: code-static-analyse
-code-static-analyse: phpstan psalm ## 📊 Code static analysis with PHPStan and PSalm
+code-static-analyse: phpstan psalm phpmd ## 📊 Code static analysis with PHPStan, Psalm and PHPMD
 
 .PHONY: shell-head
 shell-head: ## 💻 head container shell
