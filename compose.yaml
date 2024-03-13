@@ -1,4 +1,12 @@
 services:
+    head:
+        container_name: head
+        user: "${USER_ID}:${GROUP_ID}"
+        build:
+            context: .
+        restart: unless-stopped
+        volumes:
+            - .:/app:delegated
     api:
         container_name: api
         user: "${USER_ID}:${GROUP_ID}"
