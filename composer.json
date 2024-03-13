@@ -103,13 +103,20 @@
     },
     "code-static-analyse":[
       "@phpstan",
-      "@psalm"
+      "@psalm",
+      "@phpmd"
     ],
     "phpstan": [
+      "# <comment>--> Running PHPStan analisy...</comment>",
       "./vendor/bin/phpstan analyse --no-progress --memory-limit=512M"
     ],
     "psalm": [
+      "# <comment>--> Running Psalm analisy...</comment>",
       "./vendor/bin/psalm --no-progress"
+    ],
+    "phpmd": [
+      "# <comment>--> Running PHPMD analisy...</comment>",
+      "./vendor/bin/phpmd apps,src,tests ansi phpmd.xml"
     ]
   },
   "conflict": {
