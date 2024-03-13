@@ -80,28 +80,35 @@
     "symfony/polyfill-php81": "*"
   },
   "scripts": {
-    "head-cache-clear": [
-      "@php bin/head cache:clear"
-    ],
-    "api-cache-clear": [
-      "@php bin/api cache:clear"
-    ],
-    "cache-clear": [
-      "@head-cache-clear",
-      "@api-cache-clear"
-    ],
     "post-install-cmd": [
       "@cache-clear"
     ],
     "post-update-cmd": [
       "@cache-clear"
     ],
+    "cache-clear": [
+      "@head-cache-clear",
+      "@api-cache-clear"
+    ],
+    "head-cache-clear": [
+      "@php bin/head cache:clear"
+    ],
+    "api-cache-clear": [
+      "@php bin/api cache:clear"
+    ],
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
     },
+    "code-static-analyse":[
+      "@phpstan",
+      "@psalm"
+    ],
     "phpstan": [
-      "./vendor/bin/phpstan --memory-limit=512M"
+      "./vendor/bin/phpstan analyse --no-progress --memory-limit=512M"
+    ],
+    "psalm": [
+      "./vendor/bin/psalm --no-progress"
     ]
   },
   "conflict": {
