@@ -47,7 +47,8 @@
     "psalm/plugin-symfony": "^5.1",
     "psalm/plugin-phpunit": "^0.18.4",
     "weirdan/doctrine-psalm-plugin": "^2.9",
-    "phpmd/phpmd": "^2.15"
+    "phpmd/phpmd": "^2.15",
+    "symplify/easy-coding-standard": "^12.1"
   },
   "config": {
     "allow-plugins": {
