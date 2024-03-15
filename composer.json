@@ -118,8 +118,11 @@
     "phpmd": [
       "# <comment>--> Running PHPMD analisy...</comment>",
       "./vendor/bin/phpmd apps,src,tests ansi phpmd.xml"
-    ]
-  },
+    ],
+    "ecs-check": [
+      "# <comment>--> Running ecs check...</comment>",
+      "./vendor/bin/ecs"
+    ]},
   "conflict": {
     "symfony/symfony": "*"
   },
