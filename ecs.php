@@ -11,5 +11,5 @@ return ECSConfig::configure()
                     __DIR__.'/tests',
                 ])
                 ->withPhpCsFixerSets(
-                    per: true
+                    perCS: true
                 );
