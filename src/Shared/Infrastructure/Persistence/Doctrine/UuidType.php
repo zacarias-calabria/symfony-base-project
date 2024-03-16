@@ -23,7 +23,7 @@ abstract class UuidType extends StringType implements DoctrineCustomType
     #[\Override]
     public static function customTypeName(): string
     {
-        return Strings::toSnakeCase(str_replace('Type', '', (string)last(explode('\\', static::class))));
+        return Strings::toSnakeCase(str_replace('Type', '', (string) last(explode('\\', static::class))));
     }
 
     #[\Override]

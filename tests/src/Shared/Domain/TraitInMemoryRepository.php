@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\App\Shared\Domain;
 
-
 trait TraitInMemoryRepository
 {
     private bool $forceThrowAndException = false;
 
     public function __construct(
         private array $objects = []
-    ) {
-    }
+    ) {}
 
     abstract protected function getObjectId(object $object): mixed;
 

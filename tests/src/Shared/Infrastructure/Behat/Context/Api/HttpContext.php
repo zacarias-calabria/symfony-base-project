@@ -14,8 +14,7 @@ final class HttpContext extends RawMinkContext
 
     public function __construct(
         private readonly ApiClient $apiClient
-    ) {
-    }
+    ) {}
 
     /**
      * @Given /^I have the payload$/i

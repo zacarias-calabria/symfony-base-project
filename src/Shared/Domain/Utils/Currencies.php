@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Utils;
 
-
 final class Currencies
 {
     public static function calculateRateFromAmount(float $amount, float $taxRate): float

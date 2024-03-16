@@ -6,9 +6,9 @@ use Symfony\Component\Dotenv\Dotenv;
 
 $rootPath = dirname(__DIR__);
 
-require_once $rootPath.'/vendor/autoload.php';
+require_once $rootPath . '/vendor/autoload.php';
 
-(new Dotenv())->loadEnv($rootPath.'/.env');
+(new Dotenv())->loadEnv($rootPath . '/.env');
 
 if (isset($_SERVER['APP_DEBUG']) && $_SERVER['APP_DEBUG']) {
     umask(0000);
