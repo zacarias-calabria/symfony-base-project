@@ -102,7 +102,7 @@
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
     },
-    "code-static-analyse":[
+    "code-static-analyse": [
       "@phpstan",
       "@psalm",
       "@phpmd"
@@ -122,7 +122,12 @@
     "ecs-check": [
       "# <comment>--> Running ecs check...</comment>",
       "./vendor/bin/ecs"
-    ]},
+    ],
+    "ecs-fix": [
+      "# <comment>--> Running ecs fix...</comment>",
+      "./vendor/bin/ecs --fix"
+    ]
+  },
   "conflict": {
     "symfony/symfony": "*"
   },

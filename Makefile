@@ -187,26 +187,30 @@ xdebug-disable: ## 📴 Disable xDebug
 .PHONY: phpstan
 phpstan: ## 📊 PHPStan (make psalm PHPSTAN_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run PHPStan static code analysis...${INFO_PROMPT_END}"
-	@docker exec head ./vendor/bin/phpstan analyse --no-progress ${PHPSTAN_OPTIONS}
+	@docker exec -t head ./vendor/bin/phpstan analyse --no-progress ${PHPSTAN_OPTIONS}
 
 .PHONY: psalm
 psalm: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run Psalm static code analysis...${INFO_PROMPT_END}"
-	@docker exec head ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
+	@docker exec -t head ./vendor/bin/psalm --no-progress ${PSALM_OPTIONS}
 
 .PHONY: phpmd
 phpmd: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run PHPMD static code analysis...${INFO_PROMPT_END}"
-	@docker exec head ./vendor/bin/phpmd apps,src,tests ansi phpmd.xml ${PSALM_OPTIONS}
+	@docker exec -t head ./vendor/bin/phpmd apps,src,tests ansi phpmd.xml ${PSALM_OPTIONS}
 
 .PHONY: code-static-analyse
 code-static-analyse: phpstan psalm phpmd ## 📊 Code static analysis with PHPStan, Psalm and PHPMD
 
 .PHONY: ecs-check
 ecs-check: ## 🖋️ Check code standards with ecs (make ecs ECS_OPTIONS="--help")
-	@echo "${INFO_PROMPT_INIT}Run ecs check static code analysis...${INFO_PROMPT_END}"
-	@docker exec head ./vendor/bin/ecs ${ECS_OPTIONS}
+	@echo "${INFO_PROMPT_INIT}Run ecs code standards check...${INFO_PROMPT_END}"
+	@docker exec -t head ./vendor/bin/ecs ${ECS_OPTIONS}
 
+.PHONY: ecs-fix
+ecs-fix: ## 🖋️ Fix code standards with ecs (make ecs ECS_OPTIONS="--help")
+	@echo "${INFO_PROMPT_INIT}Run ecs standards fix...${INFO_PROMPT_END}"
+	@docker exec -t head ./vendor/bin/ecs --fix ${ECS_OPTIONS}
 
 .PHONY: shell-head
 shell-head: ## 💻 head container shell
