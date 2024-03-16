@@ -202,6 +202,12 @@ phpmd: ## 📊 Psalm (make psalm PSALM_OPTIONS="--help")
 .PHONY: code-static-analyse
 code-static-analyse: phpstan psalm phpmd ## 📊 Code static analysis with PHPStan, Psalm and PHPMD
 
+.PHONY: ecs-check
+ecs-check: ## 🖋️ Check code standards with ecs (make ecs ECS_OPTIONS="--help")
+	@echo "${INFO_PROMPT_INIT}Run ecs check static code analysis...${INFO_PROMPT_END}"
+	@docker exec head ./vendor/bin/ecs ${ECS_OPTIONS}
+
+
 .PHONY: shell-head
 shell-head: ## 💻 head container shell
 	@docker exec -it head sh
