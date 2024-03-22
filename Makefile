@@ -205,12 +205,12 @@ code-static-analyse: phpstan psalm phpmd ## 📊 Code static analysis with PHPSt
 .PHONY: ecs-check
 ecs-check: ## 🖋️ Check code standards with ecs (make ecs ECS_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run ecs code standards check...${INFO_PROMPT_END}"
-	@docker exec -t head ./vendor/bin/ecs ${ECS_OPTIONS}
+	@docker exec -t head ./vendor/bin/ecs --no-progress-bar ${ECS_OPTIONS}
 
 .PHONY: ecs-fix
 ecs-fix: ## 🖋️ Fix code standards with ecs (make ecs ECS_OPTIONS="--help")
 	@echo "${INFO_PROMPT_INIT}Run ecs standards fix...${INFO_PROMPT_END}"
-	@docker exec -t head ./vendor/bin/ecs --fix ${ECS_OPTIONS}
+	@docker exec -t head ./vendor/bin/ecs --no-progress-bar --fix ${ECS_OPTIONS}
 
 .PHONY: shell-head
 shell-head: ## 💻 head container shell

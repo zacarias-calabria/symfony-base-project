@@ -121,11 +121,11 @@
     ],
     "ecs-check": [
       "# <comment>--> Running ecs check...</comment>",
-      "./vendor/bin/ecs"
+      "./vendor/bin/ecs --no-progress-bar"
     ],
     "ecs-fix": [
       "# <comment>--> Running ecs fix...</comment>",
-      "./vendor/bin/ecs --fix"
+      "./vendor/bin/ecs --fix --no-progress-bar"
     ]
   },
   "conflict": {
