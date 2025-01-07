@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 WORKDIR /app
 
@@ -15,8 +15,8 @@ RUN apk --update upgrade \
     libzip-dev \
     linux-headers
 
-RUN pecl install apcu-5.1.23  \
-    && pecl install xdebug-3.3.1
+RUN pecl install apcu-5.1.24 \
+    && pecl install xdebug-3.4.1
 
 RUN docker-php-ext-install -j$(nproc) \
         bcmath \
@@ -38,4 +38,4 @@ COPY etc/infrastructure/php/ /usr/local/etc/php/
 # allow non-root users have home
 RUN mkdir -p /opt/home
 RUN chmod 777 /opt/home
-ENV HOME /opt/home
+ENV HOME=/opt/home
