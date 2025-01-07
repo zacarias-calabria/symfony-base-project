@@ -48,7 +48,7 @@ composer-cache-clear: DOCKER_COMMAND=run cache-clear ## 🧩 Symfony cache-clear
 composer composer-install composer-require composer-require-dev composer-update: composer-env-file
 	@docker run --rm $(INTERACTIVE) --volume $(CURRENT_DIR):/app --user $(id -u):$(id -g) \
 		composer:2 $(DOCKER_COMMAND) \
-			$(DOCKER_COMMAND_OPTIOM) \
+			$(DOCKER_COMMAND_OPTIONS) \
 			--no-ansi
 
 # 🐳 Docker Compose
@@ -99,10 +99,10 @@ restore-db-test:DUMP_FILE=app_test
 
 restore-db init-db restore-db-test init-db-test:
 	@echo "${INFO_PROMPT_INIT}Clearing ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec database dropdb --if-exist -f ${DB_TARGET}
-	@docker exec database createdb ${DB_TARGET}
+	@docker exec sql dropdb --if-exist -f ${DB_TARGET}
+	@docker exec sql createdb ${DB_TARGET}
 	@echo "${INFO_PROMPT_INIT}Import ${DUMP_FILE}.dump data to ${DB_TARGET} database...${INFO_PROMPT_END}"
-	@docker exec -i database pg_restore --format c --dbname ${DB_TARGET} < etc$(PSEP)postgres$(PSEP)${DUMP_FILE}.dump
+	@docker exec -i sql pg_restore --format c --dbname ${DB_TARGET} < etc$(PSEP)postgres$(PSEP)${DUMP_FILE}.dump
 
 .PHONY: db-dump
 db-dump: ##  Dumps current database in predefined location
@@ -114,7 +114,7 @@ db-dump-test:DB_TARGET=app_test
 
 db-dump db-dump-test:
 	@echo "${INFO_PROMPT_INIT}Dumping ${DB_TARGET} database into ${DB_TARGET}.dump...${INFO_PROMPT_END}"
-	@docker exec database pg_dump --format c --clean --create ${DB_TARGET} > etc$(PSEP)postgres$(PSEP)${DB_TARGET}.dump
+	@docker exec sql pg_dump --format c --clean --create ${DB_TARGET} > etc$(PSEP)postgres$(PSEP)${DB_TARGET}.dump
 	@echo "Done!"
 
 .PHONY: doctrine-migrate-db
