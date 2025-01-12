@@ -12,7 +12,7 @@ services:
         user: "${USER_ID}:${GROUP_ID}"
         build:
             context: .
-        command: "symfony server:start --dir=apps/api/public --port=8080"
+        command: "symfony server:start --dir=apps/api/public --port=8080 --allow-http --no-tls --allow-all-ip"
         restart: unless-stopped
         ports:
             - "8080:8080"
