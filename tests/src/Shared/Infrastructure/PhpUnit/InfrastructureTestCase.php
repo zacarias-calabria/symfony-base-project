@@ -32,7 +32,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
         callable $fn,
         int $totalRetries = 3,
         int $timeToWaitOnErrorInSeconds = 1,
-        int $attempt = 0
+        int $attempt = 0,
     ): void {
         try {
             $fn();

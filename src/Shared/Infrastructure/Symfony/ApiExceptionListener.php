@@ -23,8 +23,8 @@ final readonly class ApiExceptionListener
                     'code' => $this->exceptionCodeFor($exception),
                     'message' => $exception->getMessage(),
                 ],
-                $this->exceptionHandler->statusCodeFor($exception::class)
-            )
+                $this->exceptionHandler->statusCodeFor($exception::class),
+            ),
         );
     }
 

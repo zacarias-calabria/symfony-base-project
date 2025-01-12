@@ -11,7 +11,7 @@ class Intangible extends AggregateRoot
     public function __construct(
         private readonly IntangibleId $id,
         private readonly IntangibleName $name,
-        private readonly \DateTimeImmutable $createdAt
+        private readonly \DateTimeImmutable $createdAt,
     ) {}
 
     public function id(): IntangibleId

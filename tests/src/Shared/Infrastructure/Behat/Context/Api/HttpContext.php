@@ -13,7 +13,7 @@ final class HttpContext extends RawMinkContext
     private ?string $payload = null;
 
     public function __construct(
-        private readonly ApiClient $apiClient
+        private readonly ApiClient $apiClient,
     ) {}
 
     /**
@@ -32,7 +32,7 @@ final class HttpContext extends RawMinkContext
         $this->apiClient->request(
             $method,
             $uri,
-            ['content' => $this->payload]
+            ['content' => $this->payload],
         );
     }
 
@@ -44,7 +44,7 @@ final class HttpContext extends RawMinkContext
         $this->apiClient->request(
             $method,
             $uri,
-            ['content' => $body->getRaw()]
+            ['content' => $body->getRaw()],
         );
     }
 
@@ -59,8 +59,8 @@ final class HttpContext extends RawMinkContext
                     'The status code <%1$d> does not match the expected <%2$d>' . PHP_EOL . 'Message: %3$s',
                     $this->getSession()->getStatusCode(),
                     $expectedResponseCode,
-                    $this->getSession()->getPage()->getContent()
-                )
+                    $this->getSession()->getPage()->getContent(),
+                ),
             );
         }
     }

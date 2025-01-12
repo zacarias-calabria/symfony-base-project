@@ -9,7 +9,7 @@ final class Currencies
     public static function calculateRateFromAmount(float $amount, float $taxRate): float
     {
         return self::round(
-            num: ($taxRate / 100) * $amount
+            num: ($taxRate / 100) * $amount,
         );
     }
 
@@ -17,7 +17,7 @@ final class Currencies
     {
         return \round(
             num: $num,
-            precision: 2
+            precision: 2,
         );
     }
 }

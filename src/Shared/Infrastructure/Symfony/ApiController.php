@@ -17,11 +17,11 @@ abstract class ApiController
     public function __construct(
         private readonly MessageBusInterface $commandBus,
         private readonly MessageBusInterface $queryBus,
-        ApiExceptionsHttpStatusCodeMapping $exceptionHandler
+        ApiExceptionsHttpStatusCodeMapping $exceptionHandler,
     ) {
         each(
             fn(int $httpCode, string $exceptionClass) => $exceptionHandler->register($exceptionClass, $httpCode), // @phpstan-ignore-line
-            $this->exceptions()
+            $this->exceptions(),
         );
     }
 

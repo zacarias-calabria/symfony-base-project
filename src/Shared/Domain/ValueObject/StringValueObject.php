@@ -7,7 +7,7 @@ namespace App\Shared\Domain\ValueObject;
 abstract class StringValueObject implements \Stringable
 {
     public function __construct(
-        protected string $value
+        protected string $value,
     ) {
         $this->ensureIsAValidString($value);
     }

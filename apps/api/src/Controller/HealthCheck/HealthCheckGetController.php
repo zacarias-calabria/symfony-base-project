@@ -19,7 +19,7 @@ final class HealthCheckGetController extends ApiController
                 'api' => 'ok',
                 'timestamp' => (new \DateTimeImmutable())->getTimestamp(),
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 

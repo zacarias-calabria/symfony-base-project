@@ -15,7 +15,7 @@ class ApiClient
     public function request(
         string $method,
         string $uri,
-        array $optionalParams = []
+        array $optionalParams = [],
     ): void {
         $defaultOptionalParams = [
             'parameters' => [],
@@ -34,7 +34,7 @@ class ApiClient
             $optionalParams['files'],
             $optionalParams['server'],
             $optionalParams['content'],
-            $optionalParams['changeHistory']
+            $optionalParams['changeHistory'],
         );
     }
 
