@@ -7,3 +7,4 @@ imports:
   - { resource: ../../../../apps/shared/config/packages/ramsey_uuid_doctrine.yaml }
   - { resource: ../../../../apps/shared/config/packages/translation.yaml }
   - { resource: ../../../../apps/shared/config/packages/validator.yaml }
+

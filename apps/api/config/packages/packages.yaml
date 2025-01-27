@@ -9,3 +9,4 @@ imports:
   - { resource: ../../../../apps/shared/config/packages/twig.yaml }
   - { resource: ../../../../apps/shared/config/packages/validator.yaml }
   - { resource: ../../../../apps/shared/config/packages/web_profiler.yaml }
+  - { resource: ../../../../apps/shared/config/packages/google_apiclient.yaml }

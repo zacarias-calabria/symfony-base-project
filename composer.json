@@ -13,6 +13,7 @@
   "require": {
     "php": "^8.4",
     "ext-ctype": "*",
+    "ext-http": "*",
     "ext-iconv": "*",
     "symfony/flex": "^2",
     "symfony/framework-bundle": "^7",
@@ -26,7 +27,8 @@
     "doctrine/doctrine-bundle": "^2",
     "doctrine/doctrine-migrations-bundle": "^3",
     "lambdish/phunctional": "^2.1",
-    "ramsey/uuid-doctrine": "^2.0"
+    "ramsey/uuid-doctrine": "^2.0",
+    "google/apiclient": "^2"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
