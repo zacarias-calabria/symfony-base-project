@@ -15,15 +15,15 @@ class Kernel extends BaseKernel
     private const string APP_PATH = '/head';
 
     #[\Override]
-    public function getCacheDir(): string
-    {
-        return $this->getProjectDir() . self::ROOT_PATH . '/var/cache' . self::APP_PATH . '/' . $this->environment;
-    }
-
-    #[\Override]
     public function getProjectDir(): string
     {
         return \dirname(__DIR__);
+    }
+
+    #[\Override]
+    public function getCacheDir(): string
+    {
+        return $this->getProjectDir() . self::ROOT_PATH . '/var/cache' . self::APP_PATH . '/' . $this->environment;
     }
 
     #[\Override]
