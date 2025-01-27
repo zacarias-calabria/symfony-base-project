@@ -134,6 +134,9 @@
     "symfony/symfony": "*"
   },
   "extra": {
+    "runtime": {
+      "dotenv_path": "apps/shared/.env"
+    },
     "symfony": {
       "allow-contrib": false,
       "require": "^7"

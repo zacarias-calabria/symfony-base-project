@@ -272,9 +272,9 @@ compose.override.yml
 ###< Docker Compose ###
 
 ###> symfony/framework-bundle ###
-/apps/api/.env.local
-/.env.local.php
-/.env.*.local
+.env.local.php
+.env.*.local
+.env.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
