@@ -24,21 +24,22 @@ composer-env-file:
 
  .PHONY: composer-require
 composer-require: DOCKER_COMMAND=require ## 🧩 Composer require.
-composer-require: INTERACTIVE=-ti --interactive
+composer-require: INTERACTIVE=--interactive --tty
 composer-require: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
  .PHONY: composer-update
 composer-update: DOCKER_COMMAND=update ## 🧩 Composer update.
-composer-update: INTERACTIVE=-ti --interactive
+composer-update: INTERACTIVE=--interactive --tty
 composer-update: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
 .PHONY: composer-require-dev
 composer-require-dev: DOCKER_COMMAND=require --dev ## 🧩 Composer require dev.
-composer-require-dev: INTERACTIVE=-ti --interactive
+composer-require-dev: INTERACTIVE=--interactive --tty
 composer-require-dev: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
 .PHONY: composer-install
 composer-install: DOCKER_COMMAND=install ## 🧩 Composer install.
+composer-require-dev: INTERACTIVE=--interactive --tty
 composer-install: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
 .PHONY: composer-cache-clear
