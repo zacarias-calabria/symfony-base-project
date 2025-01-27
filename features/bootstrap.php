@@ -3,12 +3,13 @@
 use Symfony\Component\Dotenv\Dotenv;
 
 $rootPath = dirname(__DIR__);
+$environmentFilesPath = dirname(__DIR__).'/apps/shared';
 
 require $rootPath . '/vendor/autoload.php';
 
 // Load cached env vars if the .env.local.php file exists
 // Run "composer dump-env prod" to create it (requires symfony/flex >=1.2)
-if (is_array($env = @include $rootPath . '/.env.local.php')) {
+if (is_array($env = @include $environmentFilesPath . '/.env.local.php')) {
     foreach ($env as $k => $v) {
         $_ENV[$k] ??= isset($_SERVER[$k]) && str_starts_with($k, 'HTTP_') ? $_SERVER[$k] : $v;
     }
@@ -18,7 +19,7 @@ if (is_array($env = @include $rootPath . '/.env.local.php')) {
     );
 } else {
     // load all the .env files
-    (new Dotenv(false))->loadEnv($rootPath . '/.env');
+    new Dotenv(false)->loadEnv($environmentFilesPath . '/.env');
 }
 
 $_SERVER += $_ENV;

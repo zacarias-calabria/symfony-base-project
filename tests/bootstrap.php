@@ -5,10 +5,11 @@ declare(strict_types=1);
 use Symfony\Component\Dotenv\Dotenv;
 
 $rootPath = dirname(__DIR__);
+$environmentFilesPath = dirname(__DIR__).'/apps/shared';
 
 require_once $rootPath . '/vendor/autoload.php';
 
-(new Dotenv())->loadEnv($rootPath . '/.env');
+new Dotenv()->loadEnv($environmentFilesPath . '/.env');
 
 if (isset($_SERVER['APP_DEBUG']) && $_SERVER['APP_DEBUG']) {
     umask(0000);
