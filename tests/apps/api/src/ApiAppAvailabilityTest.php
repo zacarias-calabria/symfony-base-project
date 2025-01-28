@@ -13,9 +13,8 @@ use Tests\App\Shared\Infrastructure\PhpUnit\ApiAppWebTestCase;
 class ApiAppAvailabilityTest extends ApiAppWebTestCase
 {
     #[Test]
-    #[Group('$name')]
-    #[Group('api_app_availability')]
     #[Group('api_app')]
+    #[Group('api_app_availability')]
     #[Group('functionality')]
     #[DataProvider('checkRoutesProvider')]
     public function request_check_routes_successfully(string $method, string $route): void
