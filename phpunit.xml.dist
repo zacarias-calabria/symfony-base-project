@@ -3,7 +3,6 @@
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
          colors="true"
          bootstrap="./tests/bootstrap.php"
 >
@@ -20,6 +19,9 @@
     <testsuites>
         <testsuite name="API App Test Suite">
             <directory>./tests/apps/api/src</directory>
+        </testsuite>
+        <testsuite name="Domain Test Suite">
+            <directory>./tests/src</directory>
         </testsuite>
     </testsuites>
 </phpunit>
