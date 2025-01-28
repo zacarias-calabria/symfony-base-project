@@ -39,7 +39,7 @@ composer-require-dev: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
 .PHONY: composer-install
 composer-install: DOCKER_COMMAND=install ## 🧩 Composer install.
-composer-require-dev: INTERACTIVE=--interactive --tty
+composer-install: INTERACTIVE=--interactive --tty
 composer-install: DOCKER_COMMAND_OPTIONS=--ignore-platform-reqs
 
 .PHONY: composer-cache-clear
