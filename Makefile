@@ -54,13 +54,16 @@ composer composer-install composer-require composer-require-dev composer-update:
 
 # 🐳 Docker Compose
 .PHONY: start
-start: DOCKER_COMMAND=up --build -d ## ▶️ Up container.
+start: DOCKER_COMMAND=up -d  --build --force-recreate ## ▶️ Up containers.
+
+.PHONY: restart
+restart: DOCKER_COMMAND=restart ## ▶️ Restart containers.
 
 .PHONY: stop
-stop: DOCKER_COMMAND=stop ## ⏹ Stop container.
+stop: DOCKER_COMMAND=stop ## ⏹ Stop containers.
 
 .PHONY: destroy
-destroy: DOCKER_COMMAND=down
+destroy: DOCKER_COMMAND=down ## ⏹ Destroy containers.
 
 .PHONY: status
 status:DOCKER_COMMAND=ps ## 📈 Containers status
@@ -68,7 +71,7 @@ status:DOCKER_COMMAND=ps ## 📈 Containers status
 # Usage: `make doco DOCKER_COMMAND="ps --services"`
 # Usage: `make doco DOCKER_COMMAND="build --parallel --pull --force-rm --no-cache"`
 .PHONY: doco
-doco start stop destroy status: composer-env-file
+doco start restart stop destroy status: composer-env-file
 	USER_ID=${shell id -u} GROUP_ID=${shell id -g} docker-compose $(DOCKER_COMMAND)
 
 .PHONY: rebuild
@@ -166,24 +169,31 @@ cache-clear: ##   Clears symfony cache
 .PHONY: xdebug-enable
 xdebug-enable: ## 🧰 Enable xDebug
 	@echo "${INFO_PROMPT_INIT}Enabling xdebug...${INFO_PROMPT_END}"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = develop,debug|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = yes|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Fixing xdebug...${INFO_PROMPT_END}"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "sed -i 's|xdebug.client_host = .*|xdebug.client_host = host.docker.internal|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug on...${INFO_PROMPT_END}"
 	@$(MAKE) stop
-	@$(MAKE) start
+	@$(MAKE) restart
 
 .PHONY: xdebug-disable
 xdebug-disable: ## 📴 Disable xDebug
 	@echo "${INFO_PROMPT_INIT}Disabling xdebug...${INFO_PROMPT_END}"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "sed -i 's|xdebug.mode = .*|xdebug.mode = off|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "sed -i 's|xdebug.start_with_request = .*|xdebug.start_with_request = no|g' /usr/local/etc/php/conf.d/xdebug.ini"
+	@docker exec -u 0 api sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@docker exec -u 0 head sh -c "cat /usr/local/etc/php/conf.d/xdebug.ini"
 	@echo "${INFO_PROMPT_INIT}Restarting xdebug off...${INFO_PROMPT_END}"
 	@$(MAKE) stop
-	@$(MAKE) start
+	@$(MAKE) restart
 
 .PHONY: phpstan
 phpstan: ## 📊 PHPStan (make psalm PHPSTAN_OPTIONS="--help")
