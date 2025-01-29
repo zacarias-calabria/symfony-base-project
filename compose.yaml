@@ -7,6 +7,9 @@ services:
         restart: unless-stopped
         volumes:
             - .:/app:delegated
+        env_file:
+            - .env
+            - .env.local
     api:
         container_name: api
         user: "${USER_ID}:${GROUP_ID}"
@@ -18,6 +21,9 @@ services:
             - "8080:8080"
         volumes:
             - .:/app:delegated
+        env_file:
+            - .env
+            - .env.local
     sql:
         container_name: sql
         image: postgres:${POSTGRES_VERSION:-16}-alpine

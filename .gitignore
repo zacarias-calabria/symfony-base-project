@@ -269,6 +269,7 @@ Temporary Items
 
 ###> Docker Compose ###
 compose.override.yml
+/.env.local
 ###< Docker Compose ###
 
 ###> symfony/framework-bundle ###
