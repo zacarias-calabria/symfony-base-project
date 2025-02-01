@@ -1,5 +1,9 @@
 parameters:
     level: 8
+    parallel:
+        jobSize: 10
+        maximumNumberOfProcesses: 16
+        minimumNumberOfJobsPerProcess: 1
     paths:
         - bin/
         - apps/
