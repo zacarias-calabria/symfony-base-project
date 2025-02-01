@@ -27,23 +27,4 @@ abstract class InfrastructureTestCase extends KernelTestCase
     {
         return self::getContainer()->get($id);
     }
-
-    protected function eventually(
-        callable $fn,
-        int $totalRetries = 3,
-        int $timeToWaitOnErrorInSeconds = 1,
-        int $attempt = 0,
-    ): void {
-        try {
-            $fn();
-        } catch (\Throwable $error) {
-            if ($totalRetries === $attempt) {
-                throw $error;
-            }
-
-            sleep($timeToWaitOnErrorInSeconds);
-
-            $this->eventually($fn, $totalRetries, $timeToWaitOnErrorInSeconds, $attempt + 1);
-        }
-    }
 }
