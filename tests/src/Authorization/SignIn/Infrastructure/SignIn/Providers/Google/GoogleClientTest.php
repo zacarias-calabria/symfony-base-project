@@ -6,13 +6,14 @@ namespace Tests\App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google;
 
 use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\GoogleClient;
 use Google\Client;
+use JsonException;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\App\Shared\Infrastructure\PhpUnit\ApiAppWebTestCase;
 
 class GoogleClientTest extends ApiAppWebTestCase {
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     #[Test]
     #[Group('authorization')]
@@ -20,6 +21,7 @@ class GoogleClientTest extends ApiAppWebTestCase {
     public function should_create_an_authorization_url(): void {
         $configFile = __DIR__.'/../../../../../../../../resources/GoogleCloud/client_secret_1063523097967-f03a92mtt9ff81j1efobgkpp3dckhbrt.apps.googleusercontent.com.json';
         $jsonContent = file_get_contents($configFile);
+        assert($jsonContent !== false);
         $config = json_decode($jsonContent, true, 512, JSON_THROW_ON_ERROR);
         $sut = new GoogleClient($config);
         $sut->setRedirectUri('http://localhost');

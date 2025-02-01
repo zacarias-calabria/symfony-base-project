@@ -9,11 +9,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class HTTPSignInResponse implements SignInResponse
 {
+    /**
+     * @param array<string, string> $headers
+     */
     public function __construct(
         private ?string $content,
-        private int $statusCode,
-        private array $headers,
-    ) {}
+        private int $statusCode = Response::HTTP_OK,
+        private array $headers = [],
+    ) {
+    }
 
     public function response(): Response
     {
