@@ -26,5 +26,4 @@ final class HTTPSignInResponseTest extends TestCase
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $this->assertEquals('http://localhost/redirection', $response->headers->get('Location'));
     }
-
 }
