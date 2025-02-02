@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google;
+namespace Tests\App\Authorization\SignIn\Infrastructure\Providers\Google;
 
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Client;
+use App\Authorization\SignIn\Infrastructure\Providers\Google\Client;
 
-final readonly class GoogleClientDouble implements Client
+final class GoogleClientDouble implements Client
 {
+    /**
+     * @param string $scope
+     * @param array<string, string> $queryParams
+     */
     public function createAuthUrl($scope = null, array $queryParams = []): string
     {
         return "https://accounts.google.com/o/oauth2/v2/auth"

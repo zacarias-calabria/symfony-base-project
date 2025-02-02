@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google;
+namespace Tests\App\Authorization\SignIn\Infrastructure\Providers\Google;
 
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\HTTPSignInResponse;
+use App\Authorization\SignIn\Infrastructure\Providers\Google\HTTPSignInResponse;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

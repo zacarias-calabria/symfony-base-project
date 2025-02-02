@@ -1,10 +1,8 @@
 <?php
 
-namespace Tests\App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google;
+namespace Tests\App\Authorization\SignIn\Infrastructure\Providers\Google;
 
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\GoogleAuthorizer;
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\GoogleClient;
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\HTTPSignInResponse;
+use App\Authorization\SignIn\Infrastructure\Providers\Google\GoogleAuthorizer;
 use Exception;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;

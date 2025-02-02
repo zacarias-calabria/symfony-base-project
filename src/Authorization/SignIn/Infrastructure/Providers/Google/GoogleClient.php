@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google;
+namespace App\Authorization\SignIn\Infrastructure\Providers\Google;
 
-use App\Authorization\SignIn\Infrastructure\SignIn\Providers\Client as ProviderClient;
+use App\Authorization\SignIn\Infrastructure\Providers\Google\Client as ProviderClient;
 use Google\Client;
 
 final class GoogleClient extends Client implements ProviderClient

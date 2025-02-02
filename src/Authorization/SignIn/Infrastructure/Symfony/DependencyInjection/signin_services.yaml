@@ -7,6 +7,6 @@ services:
     App\Authorization\SignIn\:
         resource: '%context.root_path%/src/Authorization/SignIn/{Application,Domain,Infrastructure}/*'
     authorization.signin.google.client:
-        class: App\Authorization\SignIn\Infrastructure\SignIn\Providers\Google\GoogleClient
+        class: App\Authorization\SignIn\Infrastructure\Providers\Google\GoogleClient
         arguments:
             $config: '%env(json:GOOGLE_AUTH_CONFIG)%'
