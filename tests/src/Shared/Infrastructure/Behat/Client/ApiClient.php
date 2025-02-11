@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\App\Shared\Infrastructure\Behat\Client;
 
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Hook\BeforeScenario;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Session;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 
 class ApiClient
 {
-    public function __construct(private readonly Session $session) {}
+    public function __construct(private readonly Session $session)
+    {
+    }
 
     public function request(
         string $method,
@@ -18,10 +22,10 @@ class ApiClient
         array $optionalParams = [],
     ): void {
         $defaultOptionalParams = [
-            'parameters' => [],
-            'files' => [],
-            'server' => [],
-            'content' => null,
+            'parameters'    => [],
+            'files'         => [],
+            'server'        => [],
+            'content'       => null,
             'changeHistory' => true,
         ];
 
@@ -36,6 +40,11 @@ class ApiClient
             $optionalParams['content'],
             $optionalParams['changeHistory'],
         );
+    }
+
+    public function followRedirects(bool $followRedirects): void
+    {
+        $this->getClient()->followRedirects(followRedirects: $followRedirects);
     }
 
     private function getClient(): AbstractBrowser
