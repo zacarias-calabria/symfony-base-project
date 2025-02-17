@@ -26,6 +26,7 @@ final readonly class BoundedContextServicesLoader
             $namespace = $metadata->getNamespace();
             $dir = $metadata->getRootDir();
             self::wireHttpControllers($services, $namespace, $dir);
+            self::wireServices($context, $metadata, $container);
         }
     }
 
@@ -80,5 +81,13 @@ final readonly class BoundedContextServicesLoader
             ->autowire()
             ->autoconfigure()
             ->public();
+    }
+
+    private static function wireServices(Context $context, Metadata $meta, ContainerConfigurator $configurator): void
+    {
+        $path = $meta->getRelativePath('Infrastructure/DependencyInjection/Symfony');
+
+        $configurator->import(sprintf('%s/services.yaml', $path), 'yaml', 'not_found');
+        $configurator->import(sprintf('%s/services_%s.yaml', $path, $context->env), 'yaml', 'not_found');
     }
 }
