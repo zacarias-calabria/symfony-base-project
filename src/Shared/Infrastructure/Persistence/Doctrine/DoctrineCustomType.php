@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Doctrine\Dbal;
+namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
 interface DoctrineCustomType
 {

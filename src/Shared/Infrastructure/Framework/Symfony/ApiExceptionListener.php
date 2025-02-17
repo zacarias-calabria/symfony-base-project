@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Symfony;
+namespace App\Shared\Infrastructure\Framework\Symfony;
 
 use App\Shared\Domain\DomainError;
 use App\Shared\Domain\Utils\Classes;

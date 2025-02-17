@@ -13,10 +13,10 @@ services:
         - { name: messenger.message_handler, bus: query.bus }
   App\Shared\:
     resource: '%context.root_path%/src/Shared/{Application,Domain,Infrastructure}/*'
-  App\Shared\Infrastructure\Symfony\ApiExceptionListener:
+  App\Shared\Infrastructure\Framework\Symfony\ApiExceptionListener:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onException }
-  App\Shared\Infrastructure\Symfony\ApiController:
+  App\Shared\Infrastructure\Framework\Symfony\ApiController:
     arguments:
       $commandBus: '@command.bus'
       $queryBus: '@query.bus'

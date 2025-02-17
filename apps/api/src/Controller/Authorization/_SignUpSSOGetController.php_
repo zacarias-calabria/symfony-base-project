@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Apps\API\Controller\Authorization;
 
-use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shared\Infrastructure\Framework\Symfony\ApiController;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

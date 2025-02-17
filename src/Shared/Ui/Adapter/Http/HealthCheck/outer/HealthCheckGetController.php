@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Apps\API\Controller\HealthCheck;
+namespace App\Shared\Ui\Adapter\Http\HealthCheck\outer;
 
-use App\Shared\Infrastructure\Symfony\ApiController;
+use App\Shared\Infrastructure\Framework\Symfony\ApiController;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/health-check', name: 'health_check_get', methods: ['GET'])]
+#[Route('/inner/health-check', methods: ['GET'])]
 final class HealthCheckGetController extends ApiController
 {
     public function __invoke(): JsonResponse
@@ -17,7 +18,7 @@ final class HealthCheckGetController extends ApiController
         return new JsonResponse(
             [
                 'api' => 'ok',
-                'timestamp' => (new \DateTimeImmutable())->getTimestamp(),
+                'timestamp' => new DateTimeImmutable()->getTimestamp(),
             ],
             Response::HTTP_OK,
         );
