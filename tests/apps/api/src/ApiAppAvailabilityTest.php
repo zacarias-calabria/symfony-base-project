@@ -26,6 +26,6 @@ class ApiAppAvailabilityTest extends ApiAppWebTestCase
 
     public static function checkRoutesProvider(): Generator
     {
-        yield ['GET', '/Inner/health-check'];
+        yield ['GET', '/inner/shared/health-check'];
     }
 }
