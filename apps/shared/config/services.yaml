@@ -1,3 +1,2 @@
 imports:
   - { resource: ../../../src/Things/Intangibles/Infrastructure/Symfony/DependencyInjection/intangibles_services.yaml }
-  - { resource: ../../../src/Authorization/SignIn/Infrastructure/Symfony/DependencyInjection/signin_services.yaml }

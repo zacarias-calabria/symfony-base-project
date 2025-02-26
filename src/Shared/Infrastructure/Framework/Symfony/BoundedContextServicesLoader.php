@@ -39,30 +39,49 @@ final readonly class BoundedContextServicesLoader
 
     private static function importRoutes(Metadata $metadata, RoutingConfigurator $routes): void
     {
+        self::importBoundedContextRoutes(metadata: $metadata, routes: $routes);
+        self::importModulesRoutes(metadata: $metadata, routes: $routes);
+    }
+
+    private static function importBoundedContextRoutes(Metadata $metadata, RoutingConfigurator $routes): void
+    {
         $rootDir = $metadata->getRootDir();
-        $boundedContextName = strtolower(basename($metadata->getRootDir()));
-        $controllersDir = sprintf('%s/Ui/Adapter/Http', $rootDir);
-
-        if (is_dir($controllersDir)) {
-            $routes->import($controllersDir, 'attribute', false);
+        $httpAdapterPath = '%s/Ui/Adapter/Http';
+        $baseControllersDir = sprintf($httpAdapterPath, $rootDir);
+        if (is_dir($baseControllersDir)) {
+            $routes->import($baseControllersDir, 'attribute', false);
         }
+        $rootName = strtolower(basename($rootDir));
+        self::importRoutesInDir(routes: $routes, baseControllersDir: $baseControllersDir, rootName: $rootName, type: 'Inner');
+        self::importRoutesInDir(routes: $routes, baseControllersDir: $baseControllersDir, rootName: $rootName, type: 'Outer');
+    }
 
-        self::importRoutesInDir($routes, $rootDir, $boundedContextName, 'inner');
-        self::importRoutesInDir($routes, $rootDir, $boundedContextName, 'outer');
+    private static function importModulesRoutes(Metadata $metadata, RoutingConfigurator $routes): void
+    {
+        $rootDir = $metadata->getRootDir();
+        $httpAdapterPath = '%s/*/Ui/Adapter/Http';
+        $baseControllersDir = sprintf($httpAdapterPath, $rootDir);
+        foreach (glob($baseControllersDir) as $baseModuleControllersDir) {
+            if (is_dir($baseModuleControllersDir)) {
+                $routes->import($baseModuleControllersDir, 'attribute', false);
+            }
+            $rootName = strtolower(basename($rootDir));
+            self::importRoutesInDir(routes: $routes, baseControllersDir: $baseModuleControllersDir, rootName: $rootName, type: 'Inner');
+            self::importRoutesInDir(routes: $routes, baseControllersDir: $baseModuleControllersDir, rootName: $rootName, type: 'Outer');
+        }
     }
 
     private static function importRoutesInDir(
         RoutingConfigurator $routes,
-        string $rootDir,
-        string $boundedContextName,
-        string $type
+        string $baseControllersDir,
+        string $rootName,
+        string $type,
     ): void {
-        $prefix = sprintf('/%s/%s', $type, $boundedContextName);
-        $controllersDir = sprintf('%s/Ui/Adapter/Http/%s', $rootDir, ucfirst($type));
+        $controllersDir = sprintf("{$baseControllersDir}/%s", ucfirst($type));
 
         if (is_dir($controllersDir)) {
-            $routes->import($controllersDir, 'annotation', false)
-                ->prefix($prefix);
+            $routes->import($controllersDir, 'attribute', false)
+                ->prefix(sprintf('/%s/%s', strtolower($type), strtolower($rootName)));
         }
     }
 
@@ -75,7 +94,7 @@ final readonly class BoundedContextServicesLoader
         $services
             ->load(
                 sprintf('%s\\Ui\\Adapter\\Http\\', $namespace),
-                sprintf('%s/Ui/Adapter/Http/**/*Controller.php', $dir)
+                sprintf('%s/Ui/Adapter/Http/**/*Controller.php', $dir),
             )
             ->tag('controller.service_arguments')
             ->autowire()
