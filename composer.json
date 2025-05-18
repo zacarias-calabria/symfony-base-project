@@ -65,6 +65,7 @@
     "psr-4": {
       "App\\Apps\\API\\": "./apps/api/src/",
       "App\\Apps\\Head\\": "./apps/head/src/",
+      "App\\Apps\\Shared\\": "./apps/shared/src/",
       "App\\": "./src/"
     }
   },
