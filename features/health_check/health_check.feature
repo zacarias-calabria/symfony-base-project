@@ -5,5 +5,5 @@ Feature: Api status
     I want to check the api status
 
     Scenario: Check the api status
-        Given I send a GET request to /inner/health-check
+        Given I send a GET request to /inner/shared/health-check
         Then the response status code should be 200
