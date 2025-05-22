@@ -6,7 +6,7 @@ Feature: SSO sign up
 
     @not-follow-redirects
     Scenario: Get an URL to authorize a user through Google SSO
-        Given I send a GET request to /signup/google
+        Given I send a GET request to /inner/authorization/signup/google
         Then the response status code should be 302
         And the response should the header Location with the payload
         """
