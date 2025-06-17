@@ -157,9 +157,34 @@ final readonly class BoundedContextServicesLoader
 
     private static function wireServices(Context $context, Metadata $meta, ContainerConfigurator $configurator): void
     {
+        self::wireBoundedContextServices($context, $meta, $configurator);
+        self::wireModuleServices($context, $meta, $configurator);
+    }
+
+    private static function wireBoundedContextServices(Context $context, Metadata $meta, ContainerConfigurator $configurator): void
+    {
         $path = $meta->getRelativePath('Infrastructure/DependencyInjection/Symfony');
+
+        if (!is_dir($path)) {
+            return;
+        }
 
         $configurator->import(sprintf('%s/services.yaml', $path), 'yaml', 'not_found');
         $configurator->import(sprintf('%s/services_%s.yaml', $path, $context->env), 'yaml', 'not_found');
+    }
+
+    private static function wireModuleServices(Context $context, Metadata $meta, ContainerConfigurator $configurator): void
+    {
+        $rootDir = $meta->getRootDir();
+        $symfonyDependencyInjectionPath = '%s/*/Infrastructure/DependencyInjection/Symfony';
+        $baseSymfonyDependencyInjectionDir = sprintf($symfonyDependencyInjectionPath, $rootDir);
+
+        foreach (glob($baseSymfonyDependencyInjectionDir) as $baseModuleSymfonyDependencyInjectionDir) {
+            if (!is_dir($baseModuleSymfonyDependencyInjectionDir)) {
+                continue;
+            }
+            $configurator->import(sprintf('%s/services.yaml', $baseModuleSymfonyDependencyInjectionDir), 'yaml', 'not_found');
+            $configurator->import(sprintf('%s/services_%s.yaml', $baseModuleSymfonyDependencyInjectionDir, $context->env), 'yaml', 'not_found');
+        }
     }
 }
