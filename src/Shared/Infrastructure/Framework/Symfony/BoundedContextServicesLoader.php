@@ -40,7 +40,7 @@ final readonly class BoundedContextServicesLoader
     private static function importRoutes(Metadata $metadata, RoutingConfigurator $routes): void
     {
         self::importBoundedContextRoutes(metadata: $metadata, routes: $routes);
-        self::importModulesRoutes(metadata: $metadata, routes: $routes);
+        self::importModuleRoutes(metadata: $metadata, routes: $routes);
     }
 
     private static function importBoundedContextRoutes(Metadata $metadata, RoutingConfigurator $routes): void
@@ -67,7 +67,7 @@ final readonly class BoundedContextServicesLoader
         );
     }
 
-    private static function importModulesRoutes(Metadata $metadata, RoutingConfigurator $routes): void
+    private static function importModuleRoutes(Metadata $metadata, RoutingConfigurator $routes): void
     {
         $rootDir = $metadata->getRootDir();
         $httpAdapterPath = '%s/*/Ui/Adapter/Http';
@@ -104,11 +104,16 @@ final readonly class BoundedContextServicesLoader
             return;
         }
         $routes
-            ->import($controllersDir, 'attribute', false)
+            ->import($controllersDir, 'attribute')
             ->prefix(sprintf('/%s/%s', strtolower($type), strtolower($rootName)));
     }
 
     private static function wireHttpControllers(ServicesConfigurator $services, string $namespace, string $dir): void
+    {
+        self::wireBoundedContextHttpControllers($services, $namespace, $dir);
+        self::wireModuleHttpControllers($services, $namespace, $dir);
+    }
+    private static function wireBoundedContextHttpControllers(ServicesConfigurator $services, string $namespace, string $dir): void
     {
         if (!is_dir(sprintf('%s/Ui/Adapter/Http', $dir))) {
             return;
@@ -123,6 +128,31 @@ final readonly class BoundedContextServicesLoader
             ->autowire()
             ->autoconfigure()
             ->public();
+    }
+
+    private static function wireModuleHttpControllers(ServicesConfigurator $services, string $namespace, string $dir): void
+    {
+        $httpAdapterPath = '%s/*/Ui/Adapter/Http';
+        $baseControllersDir = sprintf($httpAdapterPath, $dir);
+        foreach (glob($baseControllersDir) as $baseModuleControllersDir) {
+            if (!is_dir($baseModuleControllersDir)) {
+                continue;
+            }
+            $normalizedDir = rtrim($dir, '/');
+            $normalizedBaseModuleControllersDir = rtrim($baseModuleControllersDir, '/');
+            $relativePath = substr($normalizedBaseModuleControllersDir, strlen($normalizedDir) + 1);
+            $pathParts = explode('/', $relativePath);
+            $module = $pathParts[0];
+            $services
+                ->load(
+                    sprintf('%1$s\\%2$s\\Ui\\Adapter\\Http\\', $namespace, $module),
+                    sprintf('%1$s/%2$s/Ui/Adapter/Http/**/*Controller.php', $dir, $module),
+                )
+                ->tag('controller.service_arguments')
+                ->autowire()
+                ->autoconfigure()
+                ->public();
+        }
     }
 
     private static function wireServices(Context $context, Metadata $meta, ContainerConfigurator $configurator): void
