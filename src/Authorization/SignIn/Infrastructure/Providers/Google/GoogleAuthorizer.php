@@ -10,18 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class GoogleAuthorizer implements Authorizer
 {
-
     public function __construct(
-        private Client $providerClient
-    ) {
-    }
+        private Client $providerClient,
+    ) {}
 
     public function signIn(): SignInResponse
     {
         return new HTTPSignInResponse(
             content: null,
             statusCode: Response::HTTP_FOUND,
-            headers: ['Location' => $this->providerClient->createAuthUrl()]
+            headers: ['Location' => $this->providerClient->createAuthUrl()],
         );
     }
 }

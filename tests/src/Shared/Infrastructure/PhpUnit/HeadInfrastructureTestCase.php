@@ -6,7 +6,6 @@ use App\Apps\Head\Kernel;
 
 class HeadInfrastructureTestCase extends InfrastructureTestCase
 {
-
     protected function kernelClass(): string
     {
         return Kernel::class;

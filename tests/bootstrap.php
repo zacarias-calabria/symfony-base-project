@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Symfony\Component\Dotenv\Dotenv;
 
 $rootPath = dirname(__DIR__);
-$environmentFilesPath = dirname(__DIR__).'/apps/shared';
+$environmentFilesPath = dirname(__DIR__) . '/apps/shared';
 
 require_once $rootPath . '/vendor/autoload.php';
 

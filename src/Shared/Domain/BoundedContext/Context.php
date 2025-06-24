@@ -8,7 +8,6 @@ final readonly class Context
 {
     public function __construct(
         public string $env,
-        public bool $debug
-    ) {
-    }
+        public bool $debug,
+    ) {}
 }

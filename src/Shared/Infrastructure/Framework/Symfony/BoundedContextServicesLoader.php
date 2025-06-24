@@ -18,7 +18,7 @@ final readonly class BoundedContextServicesLoader
     public static function configureContainer(
         ContainerConfigurator $container,
         Context $context,
-        string ...$boundedContexts
+        string ...$boundedContexts,
     ): void {
         $services = $container->services();
         foreach ($boundedContexts as $boundedContext) {

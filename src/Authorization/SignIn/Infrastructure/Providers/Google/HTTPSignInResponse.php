@@ -16,8 +16,7 @@ final readonly class HTTPSignInResponse implements SignInResponse
         private ?string $content,
         private int $statusCode = Response::HTTP_OK,
         private array $headers = [],
-    ) {
-    }
+    ) {}
 
     public function response(): Response
     {

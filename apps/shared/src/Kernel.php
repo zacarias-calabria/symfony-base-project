@@ -57,15 +57,15 @@ abstract class Kernel extends BaseKernel
     protected function configureContainer(ContainerConfigurator $container): void
     {
         $container->import('../config/{packages}/*.yaml');
-        $container->import('../config/{packages}/'.$this->environment.'/*.yaml');
+        $container->import('../config/{packages}/' . $this->environment . '/*.yaml');
         $container->import('../config/{services}.yaml');
-        $container->import('../config/{services}_'.$this->environment.'.yaml');
+        $container->import('../config/{services}_' . $this->environment . '.yaml');
         BoundedContextServicesLoader::configureContainer($container, $this->context, ...$this->boundedContexts);
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import('../config/{routes}/' . $this->environment . '/*.yaml');
         $routes->import('../config/{routes}/*.yaml');
         $routes->import('../config/{routes}.yaml');
         BoundedContextServicesLoader::configureRouter($routes, ...$this->boundedContexts);
@@ -73,8 +73,8 @@ abstract class Kernel extends BaseKernel
 
     private function registerBoundedContexts(): void
     {
-        $boundedContexts = require $this->getProjectDir().$this->getRootPath(
-            ).'/apps/shared/config/boundedContexts.php';
+        $boundedContexts = require $this->getProjectDir() . $this->getRootPath(
+        ) . '/apps/shared/config/boundedContexts.php';
         foreach ($boundedContexts as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
                 $this->boundedContexts[] = $class;

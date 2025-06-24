@@ -15,11 +15,12 @@ final class HTTPSignInResponseTest extends TestCase
     #[Test]
     #[Group('authorization')]
     #[Group('unit')]
-    public function the_response_is_a_suitable_http_response(): void {
+    public function the_response_is_a_suitable_http_response(): void
+    {
         $sut = new HTTPSignInResponse(
             null,
             Response::HTTP_OK,
-            headers: ['Location' => 'http://localhost/redirection']
+            headers: ['Location' => 'http://localhost/redirection'],
         );
         $response = $sut->response();
         $this->assertEmpty($response->getContent());

@@ -11,7 +11,6 @@ use Tests\App\Shared\Infrastructure\PhpUnit\HeadInfrastructureTestCase;
 
 class GoogleAuthorizerTest extends HeadInfrastructureTestCase
 {
-
     /**
      * @throws Exception
      */

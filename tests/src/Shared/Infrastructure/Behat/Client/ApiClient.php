@@ -12,9 +12,7 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 
 class ApiClient
 {
-    public function __construct(private readonly Session $session)
-    {
-    }
+    public function __construct(private readonly Session $session) {}
 
     public function request(
         string $method,

@@ -18,8 +18,8 @@ final class CacheStateTokenStorage implements StateTokenStorage
 
     public function __construct(
         CacheItemPoolInterface $cache,
-        string $namespace = 'oauth_state_token_cache')
-    {
+        string $namespace = 'oauth_state_token_cache',
+    ) {
         $this->cache = $cache;
         $this->namespace = $namespace;
     }
