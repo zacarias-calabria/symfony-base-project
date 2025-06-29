@@ -4,13 +4,6 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
-  _instanceof:
-    App\Shared\Domain\Bus\Command\CommandHandler:
-      tags:
-        - { name: messenger.message_handler, bus: command.bus }
-    App\Shared\Domain\Bus\Query\QueryHandler:
-      tags:
-        - { name: messenger.message_handler, bus: query.bus }
   App\Shared\:
     resource: '%context.root_path%/src/Shared/{Application,Domain,Infrastructure}/*'
   App\Shared\Infrastructure\Framework\Symfony\ApiExceptionListener:

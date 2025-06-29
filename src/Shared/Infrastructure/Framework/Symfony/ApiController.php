@@ -7,6 +7,7 @@ namespace App\Shared\Infrastructure\Framework\Symfony;
 use App\Shared\Domain\Bus\Command\Command;
 use App\Shared\Domain\Bus\Query\Query;
 use App\Shared\Domain\Bus\Query\Response;
+use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
@@ -30,6 +31,9 @@ abstract class ApiController
      */
     abstract protected function exceptions(): array;
 
+    /**
+     * @throws ExceptionInterface
+     */
     protected function ask(Query $query): ?Response
     {
         /** @var HandledStamp $stamp */
@@ -37,6 +41,9 @@ abstract class ApiController
         return $stamp->getResult();
     }
 
+    /**
+     * @throws ExceptionInterface
+     */
     public function dispatch(Command $command): void
     {
         $this->commandBus->dispatch($command);
