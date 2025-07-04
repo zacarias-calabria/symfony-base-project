@@ -33,7 +33,7 @@ final class EventCheckerStrategy extends AbstractCheckerStrategy
         $partOfNameRegex = sprintf('/(([a-zA-Z]{1,3})On%sHandler)$/', $reflectionMessageClass->getShortName());
 
         if (!preg_match($partOfNameRegex, $handler)) {
-            throw new LogicException(sprintf('Handler must be named from the message name, expected %s but handler name is %s.', $this->messageClass.'Handler', $handler));
+            throw new LogicException(sprintf('Handler must be named from the message name, expected %s but handler name is %s.', $this->messageClass . 'Handler', $handler));
         }
     }
 
